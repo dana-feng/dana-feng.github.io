@@ -19,6 +19,10 @@ h1, h2, h3, h4, h5 {
     .landing-art {
         position: relative;
     }
+    .profile-text {
+        width: 100%;
+        height: auto;
+    }
 }
 @media (min-width: 990px) {
     .landing-page {
@@ -27,6 +31,10 @@ h1, h2, h3, h4, h5 {
     }
     .landing-art {
         position: relative; top: -10vh; left: 30vw;
+    }
+    .profile-text {
+        width: 50%;
+        height: auto;
     }
 }
 
