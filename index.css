@@ -18,10 +18,22 @@ h1, h2, h3, h4, h5 {
     }
     .landing-art {
         position: relative;
+        width:309px
+;
     }
     .profile-text {
         width: 100%;
         height: auto;
+    }
+    .section-spacing {
+        padding-bottom: 4vh;
+        width: 100%;
+        text-align: center;
+        margin: auto;
+    }
+    .video-style {
+        width: 300px;
+        margin-bottom: 5vh;
     }
 }
 @media (min-width: 990px) {
@@ -31,10 +43,23 @@ h1, h2, h3, h4, h5 {
     }
     .landing-art {
         position: relative; top: -10vh; left: 30vw;
+        width:309px;
     }
     .profile-text {
         width: 50%;
         height: auto;
+    }
+    .section-spacing {
+        padding-bottom: 4vh;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+ 
+    }
+    .video-style {
+        width: 500px;
+        margin-bottom: 5vh;
+
     }
 }
 
@@ -98,4 +123,8 @@ a:hover {
     text-decoration: underline;
     color: #4259A8;
 
+}
+
+.clay-img {
+    padding-bottom: 10px;
 }
