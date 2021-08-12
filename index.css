@@ -12,13 +12,19 @@ h1, h2, h3, h4, h5 {
     text-align: end;
 }
 @media (max-width: 990px) {
+    .landing-text {
+        text-align:left;
+        font-size: 60px; font-weight: 500;
+
+    }
     .landing-page {
         margin-top: 15vh;
         justify-content: center;
     }
     .landing-art {
         position: relative;
-        width:309px
+        text-align: center;
+        width:209px
 ;
     }
     .profile-text {
@@ -35,8 +41,16 @@ h1, h2, h3, h4, h5 {
         width: 300px;
         margin-bottom: 5vh;
     }
+    .caption-text {
+        width: 100%; height: auto; color: #5268B6
+    }
 }
 @media (min-width: 990px) {
+    .landing-text {
+        text-align:left;
+        font-size: 75px; font-weight: 500;
+
+    }
     .landing-page {
         margin-top: 30vh;
         justify-content: center;
@@ -60,6 +74,9 @@ h1, h2, h3, h4, h5 {
         width: 500px;
         margin-bottom: 5vh;
 
+    }
+    .caption-text {
+        width: 80%; height: auto; color: #5268B6
     }
 }
 
