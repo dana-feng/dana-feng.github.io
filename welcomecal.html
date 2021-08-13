@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <link rel="stylesheet" href="index.css">
+  <title>dana feng</title>
+  <link rel="shortcut icon" type="image/svg" href="favicon.svg" />
+  <script src="landing.js"></script>
+</head>
+
+<body>
+  <nav class="fixed-top navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="logo.svg"></a>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row landing-page">
+      <div class="col section-spacing">
+        <h1 style="font-weight: 500;"> calwelcome.</h1>
+        <h5 style="height: auto; color: #5268B6">designing a smoother college orientation experience</h5>
+      </div>
+    </div>
+    <div class="row title-page img-hover-zoom">
+      <div class="col">
+        <img style="width:475px; height:auto;" class="img-fluid" src="/calwelcome2.png">
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row spacing">
+      <h2 class="title"> overview</h2>
+      <div>
+        <p>Role: Sole UX/UI Designer</p>
+        <p>Timeframe: ~20 hours</p>
+        <p>Tools: Figma, Miro</p>
+      </div>
+    </div>
+    <div class="row spacing">
+      <h2 class="title"> prompt</h2>
+      <p> As both my internship and summer came to a close, I knew I wanted to pursue a small design project before school started, so I decided to look around for design challenges. I stumbled upon Google’s 2019 Design Challenge and was instantly brought back to my quarantine college orientation experience just last fall.      </p>
+      
+      <p>This was the prompt:</p>
+      <i>Design an experience for students to discover orientation events and craft a visual system to accommodate different types of events: sports, music, visual arts, social groups, and volunteering events. The design must cover high-fidelity mocks for searching, browsing, and viewing the details for these different events.</i>
+      </div>
+      <div class="row spacing">
+      <p>I wanted to tackle this challenge, as I remembered how overwhelming college orientation was for me and how difficult it was to decide what orientation events to go to and even where to find them in the first place.</p>
+      </div>
+  </div>
+  <div id="Website" class="container-fluid">
+    <div class="row spacing">
+      <h2 class="title"> research</h2>
+    </div>
+    <div class="row spacing">
+      <p> While the prompt had all the design requirements, I still needed to hone in on how students were finding and deciding on events, as well as find any useful features that the design could include to elevate the experience.
+      </p>
+      <p>As a start, I compiled a list of initial thoughts and questions to consider so I could recall what the current state of the orientation process was for UC Berkeley and what pain points I knew I had to keep in mind as I surveyed students and did more research. After brainstorming some questions and jotting down some notes, I split the research into three parts: Reddit, Surveys, and Competitor analysis.</p>
+    </div>
+    <div class="row spacing">
+      <h5 style="font-weight: 500;"> reddit </h5>
+    </div>
+    <div class="row spacing">
+      <p> Knowing only a few upperclassmen, I wanted clear and unfiltered thoughts from a variety of different students. After searching “gbo” on the Berkeley subreddit, I found questions such as:
+      </p>
+      <ul style="width: 90%; margin: auto;">
+      <li>
+        “What GBO events are mandatory?”
+      </li>
+      <li>
+        “Missed the URAP zoom event from GBO…any important info?”
+      </li>
+      <li>
+        “How important or beneficial is the company visit for GBO?”
+      </li>
+      </ul>
+    </div>
+    <div class="row spacing">
+      <b> Key insights: Students need reviews and summaries for events, as well as a section for mandatory/recommended events to attend.</b>
+    </div>
+    <div class="row spacing">
+      <h5 style="font-weight: 500;"> surveys </h5>
+    </div>
+    <div class="row spacing">
+      <p>I surveyed 5 Berkeley students, from sophomores to seniors, and asked them 5 questions:</p>
+      <ul style="width: 90%; margin: auto;">
+      <li>
+        How did you find orientation events?
+      </li>
+      <li>
+        How did you decide what orientation events to go to? (ie how did you judge whether an event was worth it?)
+      </li>
+      <li>
+        How did you organize your schedule (ie make sure you had enough time to go from event to event & make sure that the events did not overlap)?
+      </li>
+      <li>
+        Did you know which orientation events were mandatory?
+      </li>
+      <li>
+        Any difficulties you faced during the orientation process?
+      </li>
+    </ul>
+    </div>
+
+    <div class="row spacing">
+      <h5 style="font-weight: 500;"> competitor & current user flow analysis </h5>
+    </div>
+    <div class="row spacing">
+      <p>I looked into the current user flow for orientation and also analyzed the strengths and weaknesses of the Cal Events app, the current orientation app.</p>
+    </div>
+    <div class="row spacing">
+      <b>Key Insights: Students have to follow their orientation group schedules, and fill in the gaps with their chosen orientation events. Events also need to be filterable or categorized.</b>
+    </div>
+    <div class="row spacing">
+      <p>I also had a quote from my surveys that I felt was crucial to keep in mind as I designed:</p>
+      <i>“I did not know where to go on campus and did not always know what to expect at each event. There was also no one telling me which events were super important and which weren’t.”</i>
+    </div>
+    <div class="row spacing">
+      <h2 class="title"> solution </h2>
+    </div>
+    <div class="row spacing">
+      <p> After consolidating all the pain points and insights from my research, I mapped each central point to a solution:</p>
+      <img src="wcmapping.png" class="img-fluid">
+    </div>
+  </div>
+  <div class="row spacing">
+    <h2 class="title"> user flow</h2>
+  </div>
+  <div class="row spacing">
+    <p>Taking the organized points and their solutions, I created a user flow for my redesign to map out how each solution would be incorporated in the design.</p>
+    <img src="wcuserflow.jpg" class="img-fluid">
+  </div>
+  <div class="row spacing">
+    <h2 class="title"> wireframes </h2>
+  </div>
+  <div class="row spacing">
+    <img src="wcwireframes.png" class="img-fluid">
+  </div>
+  <div class="row spacing">
+    <h2 class="title"> high fidelity mockups</h2>
+  </div>
+  <div class="row spacing">
+    <img src="wchifi.png" class="img-fluid">
+  </div>
+  <div style="justify-content: center" class="row">
+    <video controls loop class="video-style">
+      <source src="app demo.mov" type="video/mp4">
+    </video>  
+  </div>
+  <div class="row spacing">
+    <h2 class="title"> reflection</h2>
+  </div>
+  <div class="row spacing">
+    <p>Overall, this was a great way to learn more about the UX process, and also to practice some UI design as well. I ended up incorporating screenshots of Google Calendar and Google Maps into the prototype in order to highlight the fact that the app would connect to the two, as there was no purpose in reinventing a calendar and a map feature. If I had more time, I would definitely add more graphics and animation, as well as refine the prototype to include more user flows and functionality.</p>
+  <small>* all photographs used in the mockup belong to their respective owners</small>
+  </div>
+  <div style="text-align: center; margin-bottom: 30vh;" id="copyright">
+    <h5>© 2021 Dana Feng</h5>
+  </div>
+  <div style="display: flex; justify-content: center; background-color: white; border: none;"
+    class="card-footer fixed-bottom">
+    <div class="row">
+      <div style="" class="col-4">
+        <a href="mailto: danafeng@berkeley.edu"><img class="email-fix" src="email.png"></a>
+      </div>
+      <div style="" class="col-4">
+        <a target="_blank" href="https://www.linkedin.com/in/dana-feng/"><img class="img-fix" src="linkedin.png"></a>
+      </div>
+      <div style="" class="col-4">
+        <a target="_blank" href="https://github.com/dana-feng"><img class="img-fix" src="github.png"></a>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
