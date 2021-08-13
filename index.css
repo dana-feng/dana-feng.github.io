@@ -33,13 +33,11 @@ h1, h2, h3, h4, h5 {
     }
     .section-spacing {
         padding-bottom: 4vh;
-        width: 100%;
         text-align: center;
         margin: auto;
     }
     .spacing {
         padding-bottom: 4vh;
-        width: 100%;
         text-align: left;
         margin: auto;
     }
