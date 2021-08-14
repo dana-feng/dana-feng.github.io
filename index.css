@@ -133,20 +133,6 @@ h1, h2, h3, h4, h5 {
     margin-left: 3vw;
     margin-right: 3vw;
 }
-.img-fix:hover {
-    width: auto;
-    height: 4vh;
-    margin-left: 3vw;
-    margin-right: 3vw;
-    background-color: #D9E1FF;
-}
-.email-fix:hover {
-    width: auto;
-    height: 3vh;
-    margin-left: 3vw;
-    margin-right: 3vw;
-    background-color: #D9E1FF;
-}
 
 .title{
     color: #4259A8;
