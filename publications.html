@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>publications - dana feng</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="index.html">| about</a>
+        <a href="publications.html" class="active">| publications</a>
+        <a href="art.html">| art</a>
+    </nav>
+
+    <main class="publications-container">
+        <div class="publications-content">
+            <div class="diagrams-section">
+                <div class="diagram-box">
+                    <img src="research.png" alt="research diagrams" class="research-image">
+                </div>
+                <div class="diagram-box">
+                    <h3 class="diagram-title">perceived task progression</h3>
+                    <svg class="line-graph" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Y-axis label -->
+                        <text x="20" y="150" transform="rotate(-90 20 150)" fill="white" font-size="14" font-family="Caveat, cursive">perceived task progression</text>
+                        
+                        <!-- Grid lines -->
+                        <line x1="80" y1="50" x2="80" y2="250" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                        <line x1="80" y1="250" x2="580" y2="250" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                        
+                        <!-- Orange line -->
+                        <path d="M 120 200 Q 200 150 250 120 Q 300 100 350 140 Q 400 180 450 160 Q 500 140 550 120" 
+                              fill="none" stroke="#ff8c42" stroke-width="3"/>
+                        
+                        <!-- Teal line -->
+                        <path d="M 120 220 Q 200 180 250 160 Q 300 140 350 130 Q 400 120 450 100 Q 500 80 550 60" 
+                              fill="none" stroke="#4ecdc4" stroke-width="3"/>
+                        
+                        <!-- Shaded area between lines -->
+                        <path d="M 120 200 Q 200 150 250 120 Q 300 100 350 140 Q 400 180 450 160 Q 500 140 550 120 L 550 60 Q 500 80 450 100 Q 400 120 350 130 Q 300 140 250 160 Q 200 180 120 220 Z" 
+                              fill="rgba(76, 175, 80, 0.3)"/>
+                        
+                        <!-- Orange line labels -->
+                        <circle cx="120" cy="200" r="4" fill="#ff8c42"/>
+                        <text x="125" y="195" fill="#ff8c42" font-size="10" font-family="Caveat, cursive">accept autocomplete</text>
+                        
+                        <circle cx="300" cy="100" r="4" fill="#ff8c42"/>
+                        <text x="305" y="95" fill="#ff8c42" font-size="10" font-family="Caveat, cursive">provide clarification</text>
+                        
+                        <circle cx="400" cy="180" r="4" fill="#ff8c42"/>
+                        <text x="405" y="175" fill="#ff8c42" font-size="10" font-family="Caveat, cursive">reject changes</text>
+                        
+                        <circle cx="500" cy="140" r="4" fill="#ff8c42"/>
+                        <text x="505" y="135" fill="#ff8c42" font-size="10" font-family="Caveat, cursive">revert changes</text>
+                        
+                        <!-- Teal line labels -->
+                        <circle cx="350" cy="130" r="4" fill="#4ecdc4"/>
+                        <text x="355" y="125" fill="#4ecdc4" font-size="10" font-family="Caveat, cursive">accept changes</text>
+                        
+                        <circle cx="550" cy="60" r="4" fill="#4ecdc4"/>
+                        <text x="555" y="55" fill="#4ecdc4" font-size="10" font-family="Caveat, cursive">manual refactor</text>
+                    </svg>
+                </div>
+
+                <div class="diagram-box">
+                    <svg class="flowchart" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                        <!-- V1 Column -->
+                        <g class="version-column" data-version="V1">
+                            <rect x="20" y="40" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="95" y="65" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">User Insights</text>
+                            
+                            <rect x="20" y="100" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="95" y="125" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Problem Statement</text>
+                            
+                            <rect x="20" y="180" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="95" y="205" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">User Workflow</text>
+                            
+                            <rect x="20" y="260" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="95" y="285" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">User Verification</text>
+                            
+                            <rect x="20" y="340" width="150" height="40" fill="#ff8c42" rx="5"/>
+                            <text x="95" y="365" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">User Feedback</text>
+                            
+                            <text x="95" y="25" fill="white" font-size="14" font-family="Caveat, cursive" text-anchor="middle" font-weight="bold">V1</text>
+                        </g>
+                        
+                        <!-- V2 Column -->
+                        <g class="version-column" data-version="V2">
+                            <rect x="220" y="180" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="295" y="205" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Input Boundaries</text>
+                            
+                            <rect x="220" y="260" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="295" y="285" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Input Modalities</text>
+                            
+                            <rect x="220" y="340" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="295" y="365" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Input Verification</text>
+                            
+                            <rect x="220" y="420" width="150" height="40" fill="#ff8c42" rx="5"/>
+                            <text x="295" y="445" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Input Processing</text>
+                            
+                            <rect x="220" y="100" width="150" height="40" fill="#ff8c42" rx="5"/>
+                            <text x="295" y="125" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Priorities</text>
+                            
+                            <text x="295" y="25" fill="white" font-size="14" font-family="Caveat, cursive" text-anchor="middle" font-weight="bold">V2</text>
+                        </g>
+                        
+                        <!-- V3 Column -->
+                        <g class="version-column" data-version="V3">
+                            <rect x="420" y="40" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="495" y="65" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Auto-Generated Task Reminders</text>
+                            
+                            <rect x="420" y="100" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="495" y="125" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Auto-Generated Task Suggestions</text>
+                            
+                            <rect x="420" y="180" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="495" y="205" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Brainstorm</text>
+                            
+                            <rect x="420" y="260" width="150" height="40" fill="#ff8c42" rx="5"/>
+                            <text x="495" y="285" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">What do users need to know?</text>
+                            
+                            <text x="495" y="25" fill="white" font-size="14" font-family="Caveat, cursive" text-anchor="middle" font-weight="bold">V3</text>
+                        </g>
+                        
+                        <!-- V4 Column -->
+                        <g class="version-column" data-version="V4">
+                            <rect x="620" y="40" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="695" y="65" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Auto-Generated Task Reminders</text>
+                            
+                            <rect x="620" y="100" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="695" y="125" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Auto-Generated Task Suggestions</text>
+                            
+                            <rect x="620" y="180" width="150" height="40" fill="#4a90e2" rx="5"/>
+                            <text x="695" y="205" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">Best Practices</text>
+                            
+                            <rect x="620" y="260" width="150" height="40" fill="#ff8c42" rx="5"/>
+                            <text x="695" y="285" fill="white" font-size="12" font-family="Caveat, cursive" text-anchor="middle">What do users need to know?</text>
+                            
+                            <text x="695" y="25" fill="white" font-size="14" font-family="Caveat, cursive" text-anchor="middle" font-weight="bold">V4</text>
+                        </g>
+                        
+                        <!-- Arrows connecting boxes -->
+                        <path d="M 170 200 L 220 200" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 170 280 L 220 280" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 370 440 L 420 200" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 370 200 L 420 200" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <path d="M 570 200 L 620 200" stroke="white" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Arrow marker definition -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="white"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="publications-list">
+                <div class="publication-item">
+                    <h3 class="publication-title">from junior to senior: allocating agency and navigating professional growth in agentic ai-mediated software engineering</h3>
+                    <p class="publication-authors">dana feng*, bhada yun*, april wang</p>
+                    <p class="publication-venue">chi 2026</p>
+                    <p class="publication-award">⭐ best paper</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3 class="publication-title">generative ai in knowledge work: design implications for data navigation and decision-making</h3>
+                    <p class="publication-authors">bhada yun*, dana feng*, ace chen, afshin nikzad, niloufar salehi</p>
+                    <p class="publication-venue">chi 2025</p>
+                    <p class="publication-award">⭐ best paper honorable mention</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3 class="publication-title">ai phenomenology for understanding human-ai experiences across eras</h3>
+                    <p class="publication-authors">bhada yun, evgenia taranova, dana feng, renn su, april wang</p>
+                    <p class="publication-venue">chi 2026 workshop on human-ai interaction alignment</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="signature">
+        dana feng
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Lusitana:wght@400;700&family=Mansalva&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lusitana', serif;
+    background-color: #35412F; /* dark olive green */
+    color: white;
+    min-height: 100vh;
+    position: relative;
+    padding: 20px;
+}
+
+/* Navigation */
+.top-nav {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1000;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Mansalva', cursive !important;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.top-nav a.active {
+    background-color: #ECB900; /* golden yellow */
+    color: #35412F;
+}
+
+.top-nav a:hover {
+    background-color: rgba(236, 185, 0, 0.3);
+}
+
+/* About Page */
+.about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 20px 100px;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-content {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+}
+
+.profile-section {
+    flex: 0 0 220px;
+}
+
+.profile-picture-wrapper {
+    width: 220px;
+    height: 220px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.text-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: white;
+}
+
+.about-text.contact {
+    margin-top: 30px;
+}
+
+.highlight {
+    color: #ECB900; /* golden yellow text */
+    font-family: 'Mansalva', cursive !important;
+}
+
+.role-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Publications Page */
+.publications-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 120px 20px 100px;
+    min-height: calc(100vh - 140px);
+}
+
+.publications-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.diagrams-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.diagram-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.research-image-wrapper {
+    width: 220px;
+    height: 220px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.research-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.diagram-title {
+    font-size: 18px;
+    color: #35412F;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.line-graph {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
+.flowchart {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+.publications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.publication-item {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.publication-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.publication-authors {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.publication-venue {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.publication-award {
+    font-size: 15px;
+    color: #ECB900;
+    font-weight: 600;
+    font-family: 'Mansalva', cursive !important;
+    margin-top: 8px;
+}
+
+/* Art Page */
+.art-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 20px 100px;
+    min-height: calc(100vh - 140px);
+}
+
+.art-content {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.art-image-section {
+    flex: 0 0 220px;
+}
+
+.art-image-wrapper {
+    width: 220px;
+    height: 220px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.art-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.art-text-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.art-text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: white;
+    text-align: left;
+}
+
+.art-text.intro {
+    margin-bottom: 30px;
+}
+
+.art-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.art-box-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: white;
+    font-family: 'Mansalva', cursive !important;
+}
+
+.art-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.art-list li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.art-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Signature */
+.signature {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: 'Mansalva', cursive !important;
+    color: white;
+    z-index: 1000;
+}
+
+/* Highlight author name in publications */
+.highlight-author {
+    color: #ECB900; /* golden yellow */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .publications-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .diagrams-section {
+        order: 2;
+    }
+    
+    .publications-list {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content,
+    .art-content {
+        flex-direction: column;
+    }
+    
+    .profile-section,
+    .art-image-section {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .art-image-section {
+        max-width: 400px;
+    }
+    
+    .top-nav {
+        position: relative;
+        top: 0;
+        right: 0;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-bottom: 30px;
+    }
+    
+    .top-nav a {
+        font-size: 20px;
+    }
+    
+    .about-container,
+    .publications-container,
+    .art-container {
+        padding: 20px 20px 100px;
+    }
+    
+    .about-text,
+    .art-text {
+        font-size: 20px;
+    }
+    
+    .publication-title {
+        font-size: 18px;
+    }
+    
+    .publication-authors,
+    .publication-venue,
+    .publication-award {
+        font-size: 16px;
+    }
+}
+
