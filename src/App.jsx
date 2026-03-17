@@ -1,21 +1,38 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import About from './pages/About'
-import Publications from './pages/Publications'
-import Art from './pages/Art'
 import Signature from './components/Signature'
+
+function ScrollToSection() {
+  const location = useLocation()
+
+  useEffect(() => {
+    const path = location.pathname.replace('/', '')
+    if (path) {
+      const el = document.getElementById(path)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [location.pathname])
+
+  return null
+}
 
 function App() {
   return (
     <Router>
       <div>
         <Navigation />
+        <ScrollToSection />
         <Routes>
           <Route path="/" element={<About />} />
           <Route path="/index.html" element={<Navigate to="/" replace />} />
-          <Route path="/publications" element={<Publications />} />
-          <Route path="/art" element={<Art />} />
+          <Route path="/publications" element={<About />} />
+          <Route path="/art" element={<About />} />
         </Routes>
         <Signature />
       </div>
@@ -24,4 +41,3 @@ function App() {
 }
 
 export default App
-

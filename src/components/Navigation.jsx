@@ -1,29 +1,29 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function Navigation() {
-  const location = useLocation()
+  const navigate = useNavigate()
+
+  function handleNav(e, path, sectionId) {
+    e.preventDefault()
+    // If already on root, just scroll directly
+    const el = document.getElementById(sectionId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+      window.history.pushState(null, '', path)
+    } else {
+      // Navigate to route, ScrollToSection will handle the scroll
+      navigate(path)
+    }
+  }
 
   return (
     <nav className="top-nav">
-      <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
-        | about
-      </Link>
-      <Link 
-        to="/publications" 
-        className={location.pathname === '/publications' ? 'active' : ''}
-      >
-        | publications
-      </Link>
-      <Link 
-        to="/art" 
-        className={location.pathname === '/art' ? 'active' : ''}
-      >
-        | art
-      </Link>
+      <a href="/" onClick={(e) => handleNav(e, '/', 'about')}>about</a>
+      <a href="/publications" onClick={(e) => handleNav(e, '/publications', 'publications')}>publications</a>
+      <a href="/art" onClick={(e) => handleNav(e, '/art', 'art')}>art</a>
     </nav>
   )
 }
 
 export default Navigation
-
