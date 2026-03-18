@@ -52,7 +52,7 @@ function About() {
         <div className="publications-list">
           <div className="publication-item">
             <h3 className="publication-title">
-              <a href="https://dl.acm.org/doi/pdf/10.1145/3706598.3713337" target="_blank" rel="noopener noreferrer">
+              <a href="https://programs.sigchi.org/chi/2026/program/content/222340" target="_blank" rel="noopener noreferrer">
                 from junior to senior: allocating agency and navigating professional growth in agentic ai-mediated software engineering
               </a>
             </h3>
@@ -63,7 +63,7 @@ function About() {
 
           <div className="publication-item">
             <h3 className="publication-title">
-              <a href="https://dl.acm.org/doi/10.1145/3772318.3791642" target="_blank" rel="noopener noreferrer">
+              <a href="https://programs.sigchi.org/chi/2025/program/content/188449" target="_blank" rel="noopener noreferrer">
                 generative ai in knowledge work: design implications for data navigation and decision-making
               </a>
             </h3>
