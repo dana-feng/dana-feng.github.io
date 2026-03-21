@@ -21,7 +21,7 @@ function About() {
 
       {/* About Section */}
       <div id="about" className="about-content">
-        <h2 className="section-heading">about</h2>
+        <h2 className="section-heading">dana feng</h2>
         <div className="profile-section">
           <div className="profile-picture-wrapper">
             <img src={profileImage} alt="dana feng" className="profile-picture" />
@@ -35,12 +35,14 @@ function About() {
 
         <div className="text-section">
           <p className="about-text">
-            hi! i'm dana 🌻, an independent human computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc! in my free time i am also an artist / illustrator for various nyc cafes and bakeries.          </p>
+            hi! i'm dana 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i’m also an artist / illustrator, and have created work for various nyc cafes and bakeries.
+          </p>
+
           <p className="about-text">
-            my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>; coming from an industry background, I am interested in research that applies to technology and ai adoption in various knowledge work industries such as software engineering.
+            my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>.  I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
           </p>
           <p className="about-text contact">
-            i'm actively looking for research collaborations! please email me at <span className="highlight">danafeng308@gmail.com</span>.
+            i’m actively looking for research collaborations! feel free to reach out at <span className="highlight">danafeng308@gmail.com</span>.
           </p>
         </div>
       </div>
@@ -49,6 +51,7 @@ function About() {
       <div className="about-section-divider" />
       <div id="publications" className="publications-content">
         <h2 className="section-heading">publications</h2>
+
         <div className="publications-list">
           <div className="publication-item">
             <h3 className="publication-title">
@@ -79,6 +82,24 @@ function About() {
             </h3>
             <p className="publication-authors">{highlightAuthor('bhada yun, evgenia taranova, dana feng, renn su, april wang')}</p>
             <p className="publication-venue">chi 2026 workshop on human-ai interaction alignment</p>
+          </div>
+          <div className="publication-item research-blurb">
+            <h3 className="publication-award" style={{ marginBottom: '12px', textAlign: 'center' }}>research interests</h3>            <p className="publication-authors">
+              i am particularly interested not only in how tools are built, but in why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
+            </p>
+
+            <p className="publication-authors">
+              i aim to bridge academia and industry by grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
+            </p>
+
+            <p className="publication-authors">
+              some questions i've been thinking about lately include:
+            </p>
+
+            <ul className="publication-authors research-blurb-list">
+              <li>how can we increase feelings of accomplishment, agency, and meaningful contribution when using ai for coding?</li>
+              <li>what kinds of systems can support the development of foundational skills, even when ai is capable of performing the underlying tasks?</li>
+            </ul>
           </div>
         </div>
       </div>

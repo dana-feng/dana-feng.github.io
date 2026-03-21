@@ -563,3 +563,13 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.research-blurb p {
+    margin-bottom: 12px;
+}
+
+.research-blurb-list {
+    padding-left: 18px;
+    list-style: disc;
+    line-height: 1.6;
+}
