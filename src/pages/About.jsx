@@ -41,9 +41,6 @@ function About() {
           <p className="about-text">
             my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>.  I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
           </p>
-          <p className="about-text contact">
-            i’m actively looking for research collaborations! feel free to reach out at <span className="highlight">danafeng308@gmail.com</span>.
-          </p>
         </div>
       </div>
 
@@ -85,7 +82,7 @@ function About() {
           </div>
           <div className="publication-item research-blurb">
             <h3 className="publication-award" style={{ marginBottom: '12px', textAlign: 'center' }}>research interests</h3>            <p className="publication-authors">
-              i am particularly interested not only in how tools are built, but in why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
+              i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
             </p>
 
             <p className="publication-authors">
@@ -120,19 +117,19 @@ function About() {
         <div className="art-text-section">
           <div className="art-box">
             <h3 className="art-box-title">
-              <a href="https://salswee.com/" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">salswee</span></a>
+              <a href="https://salswee.com/pages/about" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">salswee</span></a>
             </h3>
             <p>artwork featured on their website and social media !!</p>
           </div>
           <div className="art-box">
             <h3 className="art-box-title">
-              <a href="https://www.instagram.com/kuihcafe/" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">kuih cafe</span></a>
+              <a href="https://www.instagram.com/p/DUuB0PEDoR1/?hl=en&img_index=1" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">kuih cafe</span></a>
             </h3>
             <p>pastry boxes, stickers, and wall art &lt;3</p>
           </div>
           <div className="art-box">
             <h3 className="art-box-title">
-              <a href="https://www.instagram.com/duocafe.nyc/" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">duo cafe</span></a>
+              <a href="https://www.instagram.com/p/DNlSQxXNfZa/?hl=en" target="_blank" rel="noopener noreferrer" className="art-box-link"><span className="highlight">duo cafe</span></a>
             </h3>
             <p>large menu prints that hang in their shop :)</p>
           </div>
