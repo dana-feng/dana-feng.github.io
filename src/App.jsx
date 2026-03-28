@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'r
 import Navigation from './components/Navigation'
 import About from './pages/About'
 import Signature from './components/Signature'
+import CustomCursor from './components/CustomCursor'
+import ScrollProgress from './components/ScrollProgress'
+import EasterEgg from './components/EasterEgg'
 
 function ScrollToSection() {
   const location = useLocation()
@@ -26,6 +29,9 @@ function App() {
   return (
     <Router>
       <div>
+        <CustomCursor />
+        <ScrollProgress />
+        <EasterEgg />
         <Navigation />
         <ScrollToSection />
         <Routes>

@@ -1,27 +1,82 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const sections = ['about', 'publications', 'art']
+
+function MagneticLink({ href, children, className, onClick }) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const ref = useRef(null)
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current.getBoundingClientRect()
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+    const dx = (e.clientX - cx) / (rect.width / 2)
+    const dy = (e.clientY - cy) / (rect.height / 2)
+    setOffset({ x: dx * 5, y: dy * 5 })
+  }
+
+  const handleMouseLeave = () => setOffset({ x: 0, y: 0 })
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      className={className}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ x: offset.x, y: offset.y }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    >
+      {children}
+    </motion.a>
+  )
+}
 
 function Navigation() {
   const navigate = useNavigate()
+  const [active, setActive] = useState('about')
+
+  useEffect(() => {
+    const observers = []
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id) },
+        { threshold: 0.4 }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
 
   function handleNav(e, path, sectionId) {
     e.preventDefault()
-    // If already on root, just scroll directly
     const el = document.getElementById(sectionId)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
       window.history.pushState(null, '', path)
     } else {
-      // Navigate to route, ScrollToSection will handle the scroll
       navigate(path)
     }
   }
 
   return (
     <nav className="top-nav">
-      <a href="/" onClick={(e) => handleNav(e, '/', 'about')}>about</a>
-      <a href="/publications" onClick={(e) => handleNav(e, '/publications', 'publications')}>publications</a>
-      <a href="/art" onClick={(e) => handleNav(e, '/art', 'art')}>art</a>
+      {sections.map((id) => (
+        <MagneticLink
+          key={id}
+          href={id === 'about' ? '/' : `/${id}`}
+          className={active === id ? 'active' : ''}
+          onClick={(e) => handleNav(e, id === 'about' ? '/' : `/${id}`, id)}
+        >
+          {id}
+        </MagneticLink>
+      ))}
     </nav>
   )
 }
