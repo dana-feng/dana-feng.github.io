@@ -123,21 +123,21 @@ function PublicationItem({ pub }) {
 const artItems = [
   {
     src: 'https://i.imgur.com/QlRLdEt.png',
-    alt: 'salswee',
+    alt: 'artwork by Dana Feng for Salswee',
     label: 'salswee',
     href: 'https://salswee.com/pages/about',
     description: 'artwork featured on their website and social media',
   },
   {
     src: 'https://i.imgur.com/mmkhYmK.jpeg',
-    alt: 'kuih',
+    alt: 'artwork by Dana Feng for Kuih Cafe',
     label: 'kuih cafe',
     href: 'https://www.instagram.com/p/DUuB0PEDoR1/?hl=en&img_index=1',
     description: 'pastry boxes, stickers, and wall art',
   },
   {
     src: 'https://i.imgur.com/fFhrGHm.jpeg',
-    alt: 'duo',
+    alt: 'artwork by Dana Feng for Duo Cafe',
     label: 'duo cafe',
     href: 'https://www.instagram.com/p/DNlSQxXNfZa/?hl=en',
     description: 'large menu prints that hang in their shop',
@@ -310,13 +310,13 @@ function About() {
 
       {/* About Section */}
       <div id="about" className="about-content">
-        <h2
+        <h1
           className="section-heading"
           onMouseEnter={() => setScrambleTrigger(t => t + 1)}
           style={{ cursor: 'none' }}
         >
           {scrambledName}
-        </h2>
+        </h1>
         <FadeIn delay={0.1}>
           <div className="profile-section">
             <ProfilePicture />
@@ -331,7 +331,7 @@ function About() {
         <FadeIn delay={0.2}>
           <div className="text-section">
             <p className="about-text">
-              hi! i'm dana 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
+              hi! i'm dana feng 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
             </p>
 
             <p className="about-text">
