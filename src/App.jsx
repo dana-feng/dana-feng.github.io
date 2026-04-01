@@ -5,7 +5,6 @@ import About from './pages/About'
 import Signature from './components/Signature'
 import CustomCursor from './components/CustomCursor'
 import ScrollProgress from './components/ScrollProgress'
-import EasterEgg from './components/EasterEgg'
 
 function ScrollToSection() {
   const location = useLocation()
@@ -31,8 +30,7 @@ function App() {
       <div>
         <CustomCursor />
         <ScrollProgress />
-        <EasterEgg />
-        <Navigation />
+<Navigation />
         <ScrollToSection />
         <Routes>
           <Route path="/" element={<About />} />

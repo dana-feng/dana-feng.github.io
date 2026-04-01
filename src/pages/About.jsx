@@ -254,7 +254,7 @@ function ResearchInterests() {
               i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
             </p>
             <p style={{ marginBottom: 10 }}>
-              i aim to bridge academia and industry by grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
+              i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
             </p>
             <p style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
             <ul className="research-blurb-list">
@@ -297,9 +297,6 @@ function ProfilePicture() {
 }
 
 function About() {
-  const [scrambleTrigger, setScrambleTrigger] = useState(0)
-  const scrambledName = useScramble('dana feng', 1400, scrambleTrigger)
-
   return (
     <motion.main
       className="about-container"
@@ -310,12 +307,8 @@ function About() {
 
       {/* About Section */}
       <div id="about" className="about-content">
-        <h1
-          className="section-heading"
-          onMouseEnter={() => setScrambleTrigger(t => t + 1)}
-          style={{ cursor: 'none' }}
-        >
-          {scrambledName}
+        <h1 className="section-heading">
+          dana feng
         </h1>
         <FadeIn delay={0.1}>
           <div className="profile-section">
