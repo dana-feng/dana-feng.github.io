@@ -155,21 +155,21 @@ const artItems = [
     src: 'https://i.imgur.com/QlRLdEt.png',
     alt: 'artwork by Dana Feng for Salswee',
     label: 'salswee',
-    href: 'https://salswee.com/pages/about',
+    hrefs: ['https://salswee.com/pages/about', 'https://www.instagram.com/p/DWA8lpylV9e/?img_index=1'],
     description: 'artwork featured on their website and social media',
   },
   {
     src: 'https://i.imgur.com/mmkhYmK.jpeg',
     alt: 'artwork by Dana Feng for Kuih Cafe',
     label: 'kuih cafe',
-    href: 'https://www.instagram.com/p/DUuB0PEDoR1/?hl=en&img_index=1',
+    hrefs: ['https://www.instagram.com/p/DUuB0PEDoR1/?hl=en&img_index=1', 'https://www.instagram.com/p/DMWyyxJsjDP/'],
     description: 'pastry boxes, stickers, and wall art',
   },
   {
     src: 'https://i.imgur.com/fFhrGHm.jpeg',
     alt: 'artwork by Dana Feng for Duo Cafe',
     label: 'duo cafe',
-    href: 'https://www.instagram.com/p/DNlSQxXNfZa/?hl=en',
+    hrefs: ['https://www.instagram.com/p/DXz_zjXD3rc/?hl=en&img_index=1', 'https://www.yelp.com/biz_photos/duo-cafe-new-york?select_video=sUVaDqo3ppBpxt6QCr1JUQ'],
     description: 'large menu prints that hang in their shop',
   },
 ]
@@ -196,7 +196,13 @@ function ArtItem({ item }) {
             <h3 className="art-card-title art-modal-title highlight">{item.label}</h3>
             <p className="publication-abstract">{item.description}</p>
             <p className="check-link">
-              check more out <a href={item.href} target="_blank" rel="noopener noreferrer">here</a>
+              check more out{' '}
+              {item.hrefs.map((href, i) => (
+                <React.Fragment key={href}>
+                  {i > 0 && ' or '}
+                  <a href={href} target="_blank" rel="noopener noreferrer">here</a>
+                </React.Fragment>
+              ))}
             </p>
           </InfoModal>
         )}
@@ -284,7 +290,7 @@ function About() {
         {section === 'about' && (
           <div id="about" className="about-content about-content-full">
             <h1 className="section-heading">
-              about
+              about <span className="heading-accent">🌻</span>
             </h1>
             <FadeIn delay={0.1}>
               <div className="profile-section">
@@ -300,7 +306,7 @@ function About() {
             <FadeIn delay={0.2}>
               <div className="text-section">
                 <p className="about-text">
-                  hi! i'm dana 🌻, originally from california, now based in nyc. i'm an independent hci researcher, interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm an artist / illustrator, and have created work for various nyc cafes and bakeries.
+                  hi! i'm dana 🌻 :) i'm an independent hci researcher interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm an artist / illustrator, and have created work for various nyc cafes and bakeries.
                 </p>
               </div>
             </FadeIn>
@@ -310,7 +316,7 @@ function About() {
         {section === 'research' && (
           <div id="research" className="publications-content">
             <FadeIn>
-              <h2 className="section-heading">research</h2>
+              <h2 className="section-heading">research <span className="heading-accent">🌻</span></h2>
             </FadeIn>
 
             <div className="publications-list">
@@ -330,7 +336,7 @@ function About() {
         {section === 'art' && (
           <div id="art" className="art-content">
             <FadeIn>
-              <h2 className="section-heading">art</h2>
+              <h2 className="section-heading">art <span className="heading-accent">🌻</span></h2>
             </FadeIn>
 
             <FadeIn delay={0.08}>
