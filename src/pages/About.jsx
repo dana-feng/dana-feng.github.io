@@ -232,7 +232,7 @@ function ResearchInterests() {
           <InfoModal onClose={() => setOpen(false)}>
             <p className="publication-award" style={{ textAlign: 'center', marginBottom: 14 }}>research interests</p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
-              my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
+              I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
             </p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
@@ -300,7 +300,7 @@ function About() {
             <FadeIn delay={0.2}>
               <div className="text-section">
                 <p className="about-text">
-                  hi! i'm dana 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
+                  hi! i'm dana 🌻, originally from california, now based in nyc. i'm an independent hci researcher, interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
                 </p>
               </div>
             </FadeIn>
