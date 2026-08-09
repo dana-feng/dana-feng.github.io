@@ -458,6 +458,15 @@ body::after {
     pointer-events: none;
 }
 
+.signature-name {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.signature-name:hover {
+    color: #ECB900;
+}
+
 /* Highlight author name in publications */
 .highlight-author {
     color: #ECB900;
