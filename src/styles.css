@@ -550,8 +550,14 @@ body::after {
     color: #ECB900;
     font-family: 'Reenie Beanie', cursive;
     font-size: clamp(13px, 1.8vh, 16px);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
     padding: 16px;
+}
+
+.art-site-card:hover {
+    text-decoration-style: solid;
 }
 
 .art-card-image-wrap {
@@ -611,12 +617,31 @@ body::after {
     color: #ECB900;
     font-family: 'Reenie Beanie', cursive;
     font-size: 20px;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
     margin-top: 24px;
 }
 
 .art-link:hover {
+    text-decoration-style: solid;
+}
+
+.check-link {
+    text-align: center;
+    margin-top: 24px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.check-link a {
+    color: #ECB900;
     text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+}
+
+.check-link a:hover {
+    text-decoration-style: solid;
 }
 
 .social-links {

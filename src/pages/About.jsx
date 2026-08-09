@@ -140,9 +140,9 @@ function PublicationItem({ pub }) {
             <p className="publication-venue">{pub.venue}</p>
             {pub.award && <p className="publication-award">{pub.award}</p>}
             <p className="publication-abstract">{pub.abstract}</p>
-            <a href={pub.url} target="_blank" rel="noopener noreferrer" className="art-link">
-              check out the paper here
-            </a>
+            <p className="check-link">
+              check out the paper <a href={pub.url} target="_blank" rel="noopener noreferrer">here</a>
+            </p>
           </InfoModal>
         )}
       </AnimatePresence>
@@ -195,9 +195,9 @@ function ArtItem({ item }) {
             <img src={item.src} alt={item.alt} className="art-modal-img" />
             <h3 className="art-card-title art-modal-title highlight">{item.label}</h3>
             <p className="publication-abstract">{item.description}</p>
-            <a href={item.href} target="_blank" rel="noopener noreferrer" className="art-link">
-              check more out here
-            </a>
+            <p className="check-link">
+              check more out <a href={item.href} target="_blank" rel="noopener noreferrer">here</a>
+            </p>
           </InfoModal>
         )}
       </AnimatePresence>
@@ -284,7 +284,7 @@ function About() {
         {section === 'about' && (
           <div id="about" className="about-content about-content-full">
             <h1 className="section-heading">
-              dana feng
+              about
             </h1>
             <FadeIn delay={0.1}>
               <div className="profile-section">
