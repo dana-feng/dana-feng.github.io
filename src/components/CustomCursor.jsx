@@ -1,43 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-
-const TRAIL_COUNT = 7
-
-function TrailDot({ mouseX, mouseY, index }) {
-  const stiffness = Math.max(540 - index * 62, 80)
-  const x = useSpring(mouseX, { stiffness, damping: 26, mass: 0.1 })
-  const y = useSpring(mouseY, { stiffness, damping: 26, mass: 0.1 })
-  const size = Math.max(8 - index * 0.8, 3)
-  const ox = useTransform(x, v => v - size / 2)
-  const oy = useTransform(y, v => v - size / 2)
-
-  return (
-    <motion.div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        x: ox,
-        y: oy,
-        width: size,
-        height: size,
-        borderRadius: '50%',
-        backgroundColor: '#ECB900',
-        pointerEvents: 'none',
-        zIndex: 9997,
-        opacity: ((TRAIL_COUNT - index) / TRAIL_COUNT) * 0.38,
-      }}
-    />
-  )
-}
+import { motion, useMotionValue, useTransform } from 'framer-motion'
 
 function CustomCursor() {
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
   const [visible, setVisible] = useState(false)
 
-  const cursorX = useTransform(mouseX, v => v - 5)
-  const cursorY = useTransform(mouseY, v => v - 5)
+  const cursorX = useTransform(mouseX, v => v - 2)
+  const cursorY = useTransform(mouseY, v => v - 2)
 
   useEffect(() => {
     const move = (e) => {
@@ -55,15 +25,15 @@ function CustomCursor() {
   }, [])
 
   return (
-    <>
-      {Array.from({ length: TRAIL_COUNT }, (_, i) => (
-        <TrailDot key={i} mouseX={mouseX} mouseY={mouseY} index={i} />
-      ))}
-      <motion.div
-        className="custom-cursor"
-        style={{ opacity: visible ? 1 : 0, x: cursorX, y: cursorY }}
-      />
-    </>
+    <motion.div
+      className="custom-cursor"
+      style={{ opacity: visible ? 1 : 0, x: cursorX, y: cursorY }}
+    >
+      <svg width="18" height="18" viewBox="0 0 18 18">
+        <line x1="2" y1="2" x2="14" y2="14" stroke="#EDE7D9" strokeWidth="1" strokeLinecap="round" opacity="0.8" />
+        <circle cx="15" cy="15" r="1.4" fill="#EDE7D9" opacity="0.9" />
+      </svg>
+    </motion.div>
   )
 }
 

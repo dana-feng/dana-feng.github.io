@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { MdEmail } from 'react-icons/md'
 import { SiGooglescholar } from 'react-icons/si'
 import { FaLinkedin } from 'react-icons/fa'
@@ -41,8 +42,7 @@ function FadeIn({ children, delay = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
     >
       {children}
@@ -87,36 +87,65 @@ const publications = [
   }
 ]
 
-function PublicationItem({ pub }) {
-  const [hovered, setHovered] = useState(false)
+function InfoModal({ onClose, children }) {
+  useEffect(() => {
+    const close = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', close)
+    return () => window.removeEventListener('keydown', close)
+  }, [onClose])
 
   return (
-    <div
-      className="publication-item"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <motion.div
+      className="lightbox-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      onClick={onClose}
     >
-      <h3 className="publication-title">
-        <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
-      </h3>
-      <p className="publication-authors">{highlightAuthor(pub.authors)}</p>
-      <p className="publication-venue">{pub.venue}</p>
-      {pub.award && <p className="publication-award">{pub.award}</p>}
+      <motion.div
+        className="info-modal"
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 8 }}
+        transition={{ duration: 0.22, ease: 'easeOut' }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button type="button" className="info-modal-close" onClick={onClose} aria-label="close">×</button>
+        {children}
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function PublicationItem({ pub }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <div className="publication-item" onClick={() => setOpen(true)}>
+        <h3 className="publication-title">
+          <a href={pub.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>{pub.title}</a>
+        </h3>
+        <p className="publication-authors">{highlightAuthor(pub.authors)}</p>
+        <p className="publication-venue">{pub.venue}</p>
+        {pub.award && <p className="publication-award">{pub.award}</p>}
+        <p className="publication-hint">click to read abstract</p>
+      </div>
       <AnimatePresence>
-        {hovered && (
-          <motion.p
-            className="publication-abstract"
-            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-            animate={{ height: 'auto', opacity: 1, marginTop: 12 }}
-            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
-          >
-            {pub.abstract}
-          </motion.p>
+        {open && (
+          <InfoModal onClose={() => setOpen(false)}>
+            <h3 className="publication-title">
+              <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
+            </h3>
+            <p className="publication-authors">{highlightAuthor(pub.authors)}</p>
+            <p className="publication-venue">{pub.venue}</p>
+            {pub.award && <p className="publication-award">{pub.award}</p>}
+            <p className="publication-abstract">{pub.abstract}</p>
+          </InfoModal>
         )}
       </AnimatePresence>
-    </div>
+    </>
   )
 }
 
@@ -153,33 +182,34 @@ function ArtItem({ item, onImageClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <motion.img
-        src={item.src}
-        alt={item.alt}
-        className="art-card-img"
-        onClick={() => onImageClick(item)}
-        whileHover={{ scale: 1.03 }}
-        transition={{ duration: 0.2 }}
-        style={{ cursor: 'none' }}
-      />
+      <div className="art-card-image-wrap">
+        <motion.img
+          src={item.src}
+          alt={item.alt}
+          className="art-card-img"
+          onClick={() => onImageClick(item)}
+          whileHover={{ scale: 1.03 }}
+          transition={{ duration: 0.2 }}
+          style={{ cursor: 'none' }}
+        />
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              className="art-card-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+            >
+              <p className="art-card-description">{item.description}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       <div className="art-card-body">
         <h3 className="art-card-title">
           <a href={item.href} target="_blank" rel="noopener noreferrer" className="highlight">{item.label}</a>
         </h3>
-        <AnimatePresence>
-          {hovered && (
-            <motion.p
-              className="art-card-description"
-              initial={{ height: 0, opacity: 0, marginTop: 0 }}
-              animate={{ height: 'auto', opacity: 1, marginTop: 6 }}
-              exit={{ height: 0, opacity: 0, marginTop: 0 }}
-              transition={{ duration: 0.22, ease: 'easeInOut' }}
-              style={{ overflow: 'hidden' }}
-            >
-              {item.description}
-            </motion.p>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   )
@@ -231,144 +261,131 @@ function ArtGrid() {
 }
 
 function ResearchInterests() {
-  const [hovered, setHovered] = useState(false)
+  const [open, setOpen] = useState(false)
 
   return (
-    <div
-      className="publication-item"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <p className="publication-award" style={{ textAlign: 'center' }}>research interests</p>
+    <>
+      <div className="publication-item" onClick={() => setOpen(true)}>
+        <p className="publication-award" style={{ textAlign: 'center' }}>research interests</p>
+        <p className="publication-hint" style={{ textAlign: 'center' }}>click to read</p>
+      </div>
       <AnimatePresence>
-        {hovered && (
-          <motion.div
-            className="publication-abstract"
-            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-            animate={{ height: 'auto', opacity: 1, marginTop: 12 }}
-            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            style={{ overflow: 'hidden' }}
-          >
-            <p style={{ marginBottom: 10 }}>
+        {open && (
+          <InfoModal onClose={() => setOpen(false)}>
+            <p className="publication-award" style={{ textAlign: 'center', marginBottom: 14 }}>research interests</p>
+            <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
             </p>
-            <p style={{ marginBottom: 10 }}>
+            <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
             </p>
-            <p style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
-            <ul className="research-blurb-list">
+            <p className="publication-abstract" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
+            <ul className="research-blurb-list publication-abstract">
               <li>how can we increase feelings of accomplishment, agency, and meaningful contribution when using ai for coding?</li>
               <li>what kinds of systems can support the development of foundational skills, even when ai is capable of performing the underlying tasks?</li>
             </ul>
-          </motion.div>
+          </InfoModal>
         )}
       </AnimatePresence>
-    </div>
+    </>
   )
 }
 
 function ProfilePicture() {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 })
-  const ref = useRef(null)
-
-  const handleMouseMove = (e) => {
-    const rect = ref.current.getBoundingClientRect()
-    const cx = rect.left + rect.width / 2
-    const cy = rect.top + rect.height / 2
-    const dx = (e.clientX - cx) / (rect.width / 2)
-    const dy = (e.clientY - cy) / (rect.height / 2)
-    setTilt({ x: dy * -10, y: dx * 10 })
-  }
-
   return (
-    <motion.div
-      ref={ref}
-      className="profile-picture-wrapper"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
-      animate={{ rotateX: tilt.x, rotateY: tilt.y }}
-      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      style={{ perspective: 800, transformStyle: 'preserve-3d' }}
-    >
+    <div className="profile-picture-wrapper">
       <img src={profileImage} alt="dana feng" className="profile-picture" />
-    </motion.div>
+    </div>
   )
 }
 
-function About() {
-  return (
-    <motion.main
-      className="about-container"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-    >
+function sectionForPath(pathname) {
+  if (pathname === '/publications') return 'publications'
+  if (pathname === '/art') return 'art'
+  return 'about'
+}
 
-      {/* About Section */}
-      <div id="about" className="about-content">
-        <h1 className="section-heading">
-          dana feng
-        </h1>
-        <FadeIn delay={0.1}>
-          <div className="profile-section">
-            <ProfilePicture />
-            <div className="social-links">
-              <a href="mailto:danafeng308@gmail.com" className="social-link"><MdEmail /></a>
-              <a href="https://scholar.google.com/citations?user=m4FSnfcAAAAJ&hl=en&authuser=1&oi=ao" target="_blank" rel="noopener noreferrer" className="social-link"><SiGooglescholar /></a>
-              <a href="https://www.linkedin.com/in/dana-feng/" target="_blank" rel="noopener noreferrer" className="social-link"><FaLinkedin /></a>
+function About() {
+  const location = useLocation()
+  const section = sectionForPath(location.pathname)
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.main
+        key={section}
+        className="about-container"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -12 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+      >
+
+        {section === 'about' && (
+          <div id="about" className="about-content about-content-full">
+            <h1 className="section-heading">
+              dana feng
+            </h1>
+            <FadeIn delay={0.1}>
+              <div className="profile-section">
+                <ProfilePicture />
+                <div className="social-links">
+                  <a href="mailto:danafeng308@gmail.com" className="social-link"><MdEmail /></a>
+                  <a href="https://scholar.google.com/citations?user=m4FSnfcAAAAJ&hl=en&authuser=1&oi=ao" target="_blank" rel="noopener noreferrer" className="social-link"><SiGooglescholar /></a>
+                  <a href="https://www.linkedin.com/in/dana-feng/" target="_blank" rel="noopener noreferrer" className="social-link"><FaLinkedin /></a>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div className="text-section">
+                <p className="about-text">
+                  hi! i'm dana 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
+                </p>
+
+                <p className="about-text">
+                  my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>.  I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        )}
+
+        {section === 'publications' && (
+          <div id="publications" className="publications-content">
+            <FadeIn>
+              <h2 className="section-heading">publications</h2>
+            </FadeIn>
+
+            <div className="publications-list">
+              {publications.map((pub, i) => (
+                <FadeIn key={i} delay={i * 0.08}>
+                  <PublicationItem pub={pub} />
+                </FadeIn>
+              ))}
+
+              <FadeIn delay={0.24}>
+                <ResearchInterests />
+              </FadeIn>
             </div>
           </div>
-        </FadeIn>
+        )}
 
-        <FadeIn delay={0.2}>
-          <div className="text-section">
-            <p className="about-text">
-              hi! i'm dana feng 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
-            </p>
-
-            <p className="about-text">
-              my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>.  I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
-            </p>
-          </div>
-        </FadeIn>
-      </div>
-
-      {/* Publications Section */}
-      <div className="about-section-divider" />
-      <div id="publications" className="publications-content">
-        <FadeIn>
-          <h2 className="section-heading">publications</h2>
-        </FadeIn>
-
-        <div className="publications-list">
-          {publications.map((pub, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <PublicationItem pub={pub} />
+        {section === 'art' && (
+          <div id="art" className="art-content">
+            <FadeIn>
+              <h2 className="section-heading">
+                <a href="https://danascorner.vercel.app/" target="_blank" rel="noopener noreferrer" className="section-heading-link">art</a>
+              </h2>
             </FadeIn>
-          ))}
 
-          <FadeIn delay={0.24}>
-            <ResearchInterests />
-          </FadeIn>
-        </div>
-      </div>
+            <FadeIn delay={0.08}>
+              <ArtGrid />
+            </FadeIn>
+          </div>
+        )}
 
-      {/* Art Section */}
-      <div className="about-section-divider" />
-      <div id="art" className="art-content">
-        <FadeIn>
-          <h2 className="section-heading">
-            <a href="https://danascorner.vercel.app/" target="_blank" rel="noopener noreferrer" className="section-heading-link">art</a>
-          </h2>
-        </FadeIn>
-
-        <FadeIn delay={0.08}>
-          <ArtGrid />
-        </FadeIn>
-      </div>
-
-    </motion.main>
+      </motion.main>
+    </AnimatePresence>
   )
 }
 

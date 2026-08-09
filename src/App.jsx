@@ -1,37 +1,17 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import About from './pages/About'
 import Signature from './components/Signature'
+import DrawingCanvas from './components/DrawingCanvas'
 import CustomCursor from './components/CustomCursor'
-import ScrollProgress from './components/ScrollProgress'
-
-function ScrollToSection() {
-  const location = useLocation()
-
-  useEffect(() => {
-    const path = location.pathname.replace('/', '')
-    if (path) {
-      const el = document.getElementById(path)
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }, [location.pathname])
-
-  return null
-}
 
 function App() {
   return (
     <Router>
       <div>
-        <CustomCursor />
-        <ScrollProgress />
-<Navigation />
-        <ScrollToSection />
+        <DrawingCanvas />
+        <Navigation />
         <Routes>
           <Route path="/" element={<About />} />
           <Route path="/index.html" element={<Navigate to="/" replace />} />
@@ -39,6 +19,7 @@ function App() {
           <Route path="/art" element={<About />} />
         </Routes>
         <Signature />
+        <CustomCursor />
       </div>
     </Router>
   )

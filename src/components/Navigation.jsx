@@ -1,8 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const sections = ['about', 'publications', 'art']
+
+function sectionForPath(pathname) {
+  if (pathname === '/publications') return 'publications'
+  if (pathname === '/art') return 'art'
+  return 'about'
+}
 
 function MagneticLink({ href, children, className, onClick }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
@@ -37,32 +43,12 @@ function MagneticLink({ href, children, className, onClick }) {
 
 function Navigation() {
   const navigate = useNavigate()
-  const [active, setActive] = useState('about')
+  const location = useLocation()
+  const active = sectionForPath(location.pathname)
 
-  useEffect(() => {
-    const observers = []
-    sections.forEach((id) => {
-      const el = document.getElementById(id)
-      if (!el) return
-      const observer = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id) },
-        { threshold: 0.4 }
-      )
-      observer.observe(el)
-      observers.push(observer)
-    })
-    return () => observers.forEach((o) => o.disconnect())
-  }, [])
-
-  function handleNav(e, path, sectionId) {
+  function handleNav(e, path) {
     e.preventDefault()
-    const el = document.getElementById(sectionId)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-      window.history.pushState(null, '', path)
-    } else {
-      navigate(path)
-    }
+    navigate(path)
   }
 
   return (
@@ -72,7 +58,7 @@ function Navigation() {
           key={id}
           href={id === 'about' ? '/' : `/${id}`}
           className={active === id ? 'active' : ''}
-          onClick={(e) => handleNav(e, id === 'about' ? '/' : `/${id}`, id)}
+          onClick={(e) => handleNav(e, id === 'about' ? '/' : `/${id}`)}
         >
           {id}
         </MagneticLink>
