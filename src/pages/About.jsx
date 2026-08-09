@@ -5,7 +5,7 @@ import { SiGooglescholar } from 'react-icons/si'
 import { FaLinkedin } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const profileImage = 'https://i.imgur.com/ysUtbzn.jpeg'
+const profileImage = 'https://i.imgur.com/1xwgXT6.jpeg'
 
 const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz'
 
