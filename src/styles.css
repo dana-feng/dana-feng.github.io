@@ -481,16 +481,16 @@ body::after {
     .top-nav a {
         font-size: 20px;
     }
-}
 
-@media (max-width: 480px) {
-
-    .publications-list {
-        grid-template-columns: 1fr;
+    /* squares can end up taller than the screen on narrow phones —
+       scroll instead of silently clipping content off */
+    .about-container {
+        overflow-y: auto;
     }
 
-    .art-cards-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .publication-item {
+        aspect-ratio: unset;
+        min-height: 0;
     }
 }
 

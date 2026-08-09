@@ -300,7 +300,7 @@ function About() {
             <FadeIn delay={0.2}>
               <div className="text-section">
                 <p className="about-text">
-                  hi! i'm dana 🌻, originally from california, now based in nyc. i'm an independent hci researcher, interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
+                  hi! i'm dana 🌻, originally from california, now based in nyc. i'm an independent hci researcher, interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm an artist / illustrator, and have created work for various nyc cafes and bakeries.
                 </p>
               </div>
             </FadeIn>
