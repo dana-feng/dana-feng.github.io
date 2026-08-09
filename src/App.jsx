@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<About />} />
           <Route path="/index.html" element={<Navigate to="/" replace />} />
-          <Route path="/publications" element={<About />} />
+          <Route path="/research" element={<About />} />
           <Route path="/art" element={<About />} />
         </Routes>
         <Signature />

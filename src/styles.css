@@ -106,6 +106,7 @@ body::after {
     display: flex;
     flex-direction: column;
     gap: 0;
+    text-align: center;
 }
 
 .about-content {
@@ -250,13 +251,18 @@ body::after {
 .publications-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(8px, 1.5vh, 16px);
+    gap: clamp(14px, 2.5vh, 24px);
     width: 100%;
 }
 
 .publication-item {
     position: relative;
-    padding: clamp(10px, 2vh, 20px);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: clamp(16px, 3vh, 28px);
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 8px;
     border-left: 2px solid transparent;
@@ -270,21 +276,51 @@ body::after {
 }
 
 .publication-title {
-    font-size: clamp(13px, 1.9vh, 17px);
+    font-size: clamp(15px, 2.2vh, 19px);
     font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.publication-title-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.publication-title-small {
+    font-size: clamp(12px, 1.7vh, 15px);
     margin-bottom: 6px;
-    line-height: 1.35;
 }
 
 .publication-authors {
-    font-size: clamp(12px, 1.6vh, 15px);
-    margin-bottom: 4px;
+    font-size: clamp(13px, 1.8vh, 16px);
+    margin-bottom: 8px;
     color: rgba(255, 255, 255, 0.9);
 }
 
+.publication-authors-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(11px, 1.5vh, 13px);
+}
+
+.publication-venue-clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .publication-venue {
-    font-size: clamp(12px, 1.6vh, 15px);
-    margin-bottom: 4px;
+    font-size: clamp(13px, 1.8vh, 16px);
+    margin-bottom: 8px;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -485,16 +521,20 @@ body::after {
 
 .art-cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(8px, 1.5vh, 14px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(14px, 2.5vh, 24px);
     width: 100%;
 }
 
 .art-card {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 8px;
     border-left: 2px solid transparent;
     overflow: hidden;
+    cursor: pointer;
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -503,34 +543,54 @@ body::after {
     border-left-color: rgba(236, 185, 0, 0.5);
 }
 
+.art-site-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ECB900;
+    font-family: 'Reenie Beanie', cursive;
+    font-size: clamp(13px, 1.8vh, 16px);
+    text-decoration: none;
+    padding: 16px;
+}
+
 .art-card-image-wrap {
     position: relative;
+    flex: 1;
+    min-height: 0;
     overflow: hidden;
 }
 
 .art-card-img {
     width: 100%;
-    aspect-ratio: 1;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.art-card-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: flex-end;
-    padding: 8px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+.art-modal-img {
+    width: 100%;
+    height: auto;
+    max-height: 55vh;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    display: block;
 }
 
 .art-card-body {
+    flex-shrink: 0;
     padding: clamp(6px, 1.2vh, 10px) 10px clamp(6px, 1.2vh, 12px);
 }
 
 .art-card-title {
     font-size: clamp(12px, 1.6vh, 15px);
     font-weight: 600;
+}
+
+.art-modal-title {
+    font-size: clamp(20px, 3vh, 26px);
+    margin-bottom: 10px;
 }
 
 .art-card-title a {
@@ -544,13 +604,6 @@ body::after {
     text-decoration-style: solid;
 }
 
-.art-card-description {
-    font-size: clamp(10px, 1.4vh, 13px);
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-    font-style: italic;
-}
 
 .art-link {
     display: block;
@@ -559,7 +612,7 @@ body::after {
     font-family: 'Reenie Beanie', cursive;
     font-size: 20px;
     text-decoration: none;
-    margin-top: 8px;
+    margin-top: 24px;
 }
 
 .art-link:hover {
@@ -576,8 +629,8 @@ body::after {
 .social-link {
     color: white;
     text-decoration: none;
-    font-size: 22px;
-    padding: 6px 8px;
+    font-size: 15px;
+    padding: 5px 7px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     transition: all 0.3s ease;
@@ -742,11 +795,18 @@ a:hover {
     border-radius: 10px;
     padding: 28px 22px 22px;
     width: min(65vw, 65vh, 480px);
-    aspect-ratio: 1 / 1;
+    height: min(65vw, 65vh, 480px);
+    flex-shrink: 0;
     max-width: 92vw;
     max-height: 85vh;
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+.info-modal.art-modal {
+    width: min(70vw, 500px);
+    height: auto;
+    max-height: 85vh;
 }
 
 .info-modal-close {
@@ -768,8 +828,8 @@ a:hover {
 
 /* Publication abstract text */
 .publication-abstract {
-    font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.7);
-    font-style: italic;
+    font-size: 16px;
+    line-height: 1.55;
+    color: white;
+    margin-top: 10px;
 }

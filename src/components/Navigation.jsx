@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-const sections = ['about', 'publications', 'art']
+const sections = ['about', 'research', 'art']
 
 function sectionForPath(pathname) {
-  if (pathname === '/publications') return 'publications'
+  if (pathname === '/research') return 'research'
   if (pathname === '/art') return 'art'
   return 'about'
 }

@@ -87,7 +87,7 @@ const publications = [
   }
 ]
 
-function InfoModal({ onClose, children }) {
+function InfoModal({ onClose, children, className = '' }) {
   useEffect(() => {
     const close = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', close)
@@ -104,7 +104,7 @@ function InfoModal({ onClose, children }) {
       onClick={onClose}
     >
       <motion.div
-        className="info-modal"
+        className={`info-modal ${className}`.trim()}
         initial={{ opacity: 0, scale: 0.96, y: 8 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -124,24 +124,25 @@ function PublicationItem({ pub }) {
   return (
     <>
       <div className="publication-item" onClick={() => setOpen(true)}>
-        <h3 className="publication-title">
-          <a href={pub.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>{pub.title}</a>
+        <h3 className="publication-title publication-title-clamped publication-title-small">
+          {pub.title}
         </h3>
-        <p className="publication-authors">{highlightAuthor(pub.authors)}</p>
-        <p className="publication-venue">{pub.venue}</p>
+        <p className="publication-authors publication-authors-clamped">{highlightAuthor(pub.authors)}</p>
+        <p className="publication-venue publication-venue-clamped">{pub.venue}</p>
         {pub.award && <p className="publication-award">{pub.award}</p>}
-        <p className="publication-hint">click to read abstract</p>
+        <p className="publication-hint">click to read</p>
       </div>
       <AnimatePresence>
         {open && (
           <InfoModal onClose={() => setOpen(false)}>
-            <h3 className="publication-title">
-              <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
-            </h3>
+            <h3 className="publication-title">{pub.title}</h3>
             <p className="publication-authors">{highlightAuthor(pub.authors)}</p>
             <p className="publication-venue">{pub.venue}</p>
             {pub.award && <p className="publication-award">{pub.award}</p>}
             <p className="publication-abstract">{pub.abstract}</p>
+            <a href={pub.url} target="_blank" rel="noopener noreferrer" className="art-link">
+              check out the paper here
+            </a>
           </InfoModal>
         )}
       </AnimatePresence>
@@ -173,90 +174,47 @@ const artItems = [
   },
 ]
 
-function ArtItem({ item, onImageClick }) {
-  const [hovered, setHovered] = useState(false)
+function ArtItem({ item }) {
+  const [open, setOpen] = useState(false)
 
   return (
-    <div
-      className="art-card"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="art-card-image-wrap">
-        <motion.img
-          src={item.src}
-          alt={item.alt}
-          className="art-card-img"
-          onClick={() => onImageClick(item)}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.2 }}
-          style={{ cursor: 'none' }}
-        />
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              className="art-card-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-            >
-              <p className="art-card-description">{item.description}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+    <>
+      <div className="art-card" onClick={() => setOpen(true)}>
+        <div className="art-card-image-wrap">
+          <img src={item.src} alt={item.alt} className="art-card-img" />
+        </div>
+        <div className="art-card-body">
+          <h3 className="art-card-title">
+            <span className="highlight">{item.label}</span>
+          </h3>
+        </div>
       </div>
-      <div className="art-card-body">
-        <h3 className="art-card-title">
-          <a href={item.href} target="_blank" rel="noopener noreferrer" className="highlight">{item.label}</a>
-        </h3>
-      </div>
-    </div>
+      <AnimatePresence>
+        {open && (
+          <InfoModal onClose={() => setOpen(false)} className="art-modal">
+            <img src={item.src} alt={item.alt} className="art-modal-img" />
+            <h3 className="art-card-title art-modal-title highlight">{item.label}</h3>
+            <p className="publication-abstract">{item.description}</p>
+            <a href={item.href} target="_blank" rel="noopener noreferrer" className="art-link">
+              check more out here
+            </a>
+          </InfoModal>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
 function ArtGrid() {
-  const [lightbox, setLightbox] = useState(null)
-
-  useEffect(() => {
-    if (lightbox === null) return
-    const close = (e) => { if (e.key === 'Escape') setLightbox(null) }
-    window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
-  }, [lightbox])
-
   return (
-    <>
-      <div className="art-cards-grid">
-        {artItems.map((item, i) => (
-          <ArtItem key={i} item={item} onImageClick={setLightbox} />
-        ))}
-      </div>
-
-      <AnimatePresence>
-        {lightbox && (
-          <motion.div
-            className="lightbox-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setLightbox(null)}
-          >
-            <motion.img
-              src={lightbox.src}
-              alt={lightbox.alt}
-              className="lightbox-img"
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+    <div className="art-cards-grid">
+      {artItems.map((item, i) => (
+        <ArtItem key={i} item={item} />
+      ))}
+      <a href="https://danascorner.vercel.app/" target="_blank" rel="noopener noreferrer" className="art-card art-site-card">
+        see my art site!
+      </a>
+    </div>
   )
 }
 
@@ -273,6 +231,9 @@ function ResearchInterests() {
         {open && (
           <InfoModal onClose={() => setOpen(false)}>
             <p className="publication-award" style={{ textAlign: 'center', marginBottom: 14 }}>research interests</p>
+            <p className="publication-abstract" style={{ marginBottom: 10 }}>
+              my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
+            </p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
             </p>
@@ -300,7 +261,7 @@ function ProfilePicture() {
 }
 
 function sectionForPath(pathname) {
-  if (pathname === '/publications') return 'publications'
+  if (pathname === '/research') return 'research'
   if (pathname === '/art') return 'art'
   return 'about'
 }
@@ -341,19 +302,15 @@ function About() {
                 <p className="about-text">
                   hi! i'm dana 🌻, an independent human-computer interaction (hci) researcher and software engineer (at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>), based in nyc. in my free time, i'm also an artist / illustrator, and have created work for various nyc cafes and bakeries.
                 </p>
-
-                <p className="about-text">
-                  my research interests lie in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>.  I am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
-                </p>
               </div>
             </FadeIn>
           </div>
         )}
 
-        {section === 'publications' && (
-          <div id="publications" className="publications-content">
+        {section === 'research' && (
+          <div id="research" className="publications-content">
             <FadeIn>
-              <h2 className="section-heading">publications</h2>
+              <h2 className="section-heading">research</h2>
             </FadeIn>
 
             <div className="publications-list">
@@ -373,9 +330,7 @@ function About() {
         {section === 'art' && (
           <div id="art" className="art-content">
             <FadeIn>
-              <h2 className="section-heading">
-                <a href="https://danascorner.vercel.app/" target="_blank" rel="noopener noreferrer" className="section-heading-link">art</a>
-              </h2>
+              <h2 className="section-heading">art</h2>
             </FadeIn>
 
             <FadeIn delay={0.08}>
