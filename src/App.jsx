@@ -5,23 +5,26 @@ import About from './pages/About'
 import Signature from './components/Signature'
 import DrawingCanvas from './components/DrawingCanvas'
 import CustomCursor from './components/CustomCursor'
+import { ThemeProvider } from './ThemeContext'
 
 function App() {
   return (
-    <Router>
-      <div>
-        <DrawingCanvas />
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/index.html" element={<Navigate to="/" replace />} />
-          <Route path="/research" element={<About />} />
-          <Route path="/art" element={<About />} />
-        </Routes>
-        <Signature />
-        <CustomCursor />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div>
+          <DrawingCanvas />
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<About />} />
+            <Route path="/index.html" element={<Navigate to="/" replace />} />
+            <Route path="/research" element={<About />} />
+            <Route path="/art" element={<About />} />
+          </Routes>
+          <Signature />
+          <CustomCursor />
+        </div>
+      </Router>
+    </ThemeProvider>
   )
 }
 

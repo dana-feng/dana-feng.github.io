@@ -4,6 +4,7 @@ import { MdEmail } from 'react-icons/md'
 import { SiGooglescholar } from 'react-icons/si'
 import { FaLinkedin } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTheme } from '../ThemeContext'
 
 const profileImage = 'https://i.imgur.com/Z15TEsP.jpeg'
 
@@ -36,6 +37,11 @@ function useScramble(target, duration = 1400, trigger = 0) {
   }, [target, trigger])
 
   return text
+}
+
+function FlowerAccent({ className }) {
+  const { theme } = useTheme()
+  return <span className={className}>{theme === 'dark' ? '🪷' : '🌻'}</span>
 }
 
 function FadeIn({ children, delay = 0 }) {
@@ -290,7 +296,7 @@ function About() {
         {section === 'about' && (
           <div id="about" className="about-content about-content-full">
             <h1 className="section-heading">
-              about <span className="heading-accent">🌻</span>
+              about <FlowerAccent className="heading-accent" />
             </h1>
             <FadeIn delay={0.1}>
               <div className="profile-section">
@@ -316,7 +322,7 @@ function About() {
         {section === 'research' && (
           <div id="research" className="publications-content">
             <FadeIn>
-              <h2 className="section-heading">research <span className="heading-accent">🌻</span></h2>
+              <h2 className="section-heading">research <FlowerAccent className="heading-accent" /></h2>
             </FadeIn>
 
             <div className="publications-list">
@@ -336,7 +342,7 @@ function About() {
         {section === 'art' && (
           <div id="art" className="art-content">
             <FadeIn>
-              <h2 className="section-heading">art <span className="heading-accent">🌻</span></h2>
+              <h2 className="section-heading">art <FlowerAccent className="heading-accent" /></h2>
             </FadeIn>
 
             <FadeIn delay={0.08}>

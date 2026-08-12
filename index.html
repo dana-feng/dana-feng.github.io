@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('theme');
+                var theme = stored === 'light' || stored === 'dark'
+                    ? stored
+                    : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
 
@@ -22,6 +33,7 @@
         href="https://fonts.googleapis.com/css2?family=Cormorant Garmond:wght@400;700&family=Reenie Beanie&display=swap"
         rel="stylesheet" crossorigin="anonymous">
     <meta name="google-site-verification" content="G53VNzpvb8GBGFvBOIkmeGYZdSCNJ3tvbfnzSQRuvME" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 </head>
 
 <body>
