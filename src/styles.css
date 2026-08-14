@@ -16,6 +16,34 @@
     --backdrop-bg-rgb: 25, 31, 21;
 }
 
+:root[data-theme="light"] {
+    --bg: #FFFFFF;
+    --text-rgb: 53, 65, 47;
+    --accent: #B8860B;
+    --card-rgb: 53, 65, 47;
+    --modal-bg-rgb: 255, 255, 255;
+    --modal-border-rgb: 53, 65, 47;
+    --backdrop-bg-rgb: 235, 235, 230;
+}
+
+/* The translucent card/box tint reads too faint against the light background —
+   deepen it so it still shows up as a darker green tint */
+:root[data-theme="light"] .role-box,
+:root[data-theme="light"] .social-link {
+    background-color: rgba(var(--card-rgb), 0.08);
+}
+
+:root[data-theme="light"] .publication-item,
+:root[data-theme="light"] .art-card {
+    background-color: rgba(var(--card-rgb), 0.05);
+    box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.12);
+}
+
+:root[data-theme="light"] .publication-item:hover,
+:root[data-theme="light"] .art-card:hover {
+    background-color: rgba(var(--card-rgb), 0.08);
+}
+
 h1,
 h2,
 h3,
@@ -38,33 +66,38 @@ body {
     position: relative;
 }
 
-/* Blurred background photo — dark mode by default */
+/* Paper grain */
 body::before {
     content: '';
     position: fixed;
-    inset: -20px;
+    inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-image: url("https://i.imgur.com/x2Cv9PL.jpeg");
-    background-size: cover;
-    background-position: center 75%;
-    background-repeat: no-repeat;
-    filter: blur(2px);
+    opacity: 0.52;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.1 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 220px 220px;
+    mix-blend-mode: overlay;
 }
 
+/* Grain + vignette make sense on the rich dark-green paper look, but just
+   read as dirty gray smudging on a clean white background — drop both */
 :root[data-theme="light"] body::before {
-    background-image: url("https://i.imgur.com/sPRJ9XW.jpeg");
-    background-position: center;
+    display: none;
 }
 
-/* Dark wash over the photo so text stays readable without any solid panel behind it */
+/* Soft paper vignette */
 body::after {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.18) 100%);
+}
+
+:root[data-theme="light"] body::after {
+    display: none;
 }
 
 #root {
@@ -122,6 +155,18 @@ body::after {
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.signature .publication-award {
+    color: rgba(var(--text-rgb), 0.6);
+}
+
+.signature .theme-toggle {
+    pointer-events: auto;
+    font-size: 16px;
+    padding: 0 0 0 8px;
+    margin: 0;
+    vertical-align: middle;
 }
 
 .theme-toggle:hover {
@@ -429,7 +474,7 @@ body::after {
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 18px;
-    color: white;
+    color: rgb(var(--text-rgb));
     text-align: left;
 }
 
@@ -438,7 +483,7 @@ body::after {
 }
 
 .art-box {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(var(--card-rgb), 0.1);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -449,7 +494,7 @@ body::after {
     font-weight: 600;
     margin-bottom: 8px;
     line-height: 1.4;
-    color: white;
+    color: rgb(var(--text-rgb));
     font-family: 'Cormorant Garamond';
 }
 
@@ -457,7 +502,7 @@ body::after {
     list-style: none;
     padding: 0;
     margin: 0;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(var(--text-rgb), 0.9);
     font-size: 15px;
     line-height: 1;
 }
@@ -472,7 +517,7 @@ body::after {
     content: "•";
     position: absolute;
     left: 0;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(var(--text-rgb), 0.8);
 }
 
 /* Signature */
@@ -873,6 +918,10 @@ a:hover {
     mix-blend-mode: overlay;
 }
 
+:root[data-theme="light"] .lightbox-backdrop::before {
+    display: none;
+}
+
 .lightbox-img {
     max-width: 90vw;
     max-height: 90vh;
@@ -911,6 +960,10 @@ a:hover {
     background-repeat: repeat;
     background-size: 220px 220px;
     mix-blend-mode: overlay;
+}
+
+:root[data-theme="light"] .info-modal::before {
+    display: none;
 }
 
 .info-modal.art-modal {
