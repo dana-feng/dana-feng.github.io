@@ -766,6 +766,14 @@ body.modal-open .signature {
     display: block;
 }
 
+@media (max-width: 520px) {
+    /* 55vh makes the art popup much taller than the text-only research
+       ones on a small screen — bring them closer in size */
+    .art-modal-img {
+        max-height: 35vh;
+    }
+}
+
 .art-card-body {
     flex-shrink: 0;
     padding: clamp(6px, 1.2vh, 10px) 10px clamp(6px, 1.2vh, 12px);
