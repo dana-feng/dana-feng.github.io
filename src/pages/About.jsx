@@ -254,8 +254,8 @@ function ResearchInterests() {
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
             </p>
-            <p className="publication-abstract handwritten-note" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
-            <ul className="research-blurb-list publication-abstract handwritten-note">
+            <p className="publication-abstract" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
+            <ul className="research-blurb-list publication-abstract">
               <li>how can we increase feelings of accomplishment, agency, and meaningful contribution when using ai for coding?</li>
               <li>what kinds of systems can support the development of foundational skills, even when ai is capable of performing the underlying tasks?</li>
             </ul>
