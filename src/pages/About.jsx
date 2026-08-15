@@ -41,7 +41,7 @@ function useScramble(target, duration = 1400, trigger = 0) {
 
 function FlowerAccent({ className }) {
   const { theme } = useTheme()
-  return <span className={className}>{theme === 'dark' ? '🪷' : '🌻'}</span>
+  return <span className={className}>{theme === 'dark' ? '🌿' : '🍁'}</span>
 }
 
 function FadeIn({ children, delay = 0 }) {

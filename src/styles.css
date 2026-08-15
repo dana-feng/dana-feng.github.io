@@ -17,13 +17,13 @@
 }
 
 :root[data-theme="light"] {
-    --bg: #FFFFFF;
+    --bg: #FEFBF3;
     --text-rgb: 53, 65, 47;
     --accent: #B8860B;
     --card-rgb: 53, 65, 47;
-    --modal-bg-rgb: 255, 255, 255;
+    --modal-bg-rgb: 238, 229, 199;
     --modal-border-rgb: 53, 65, 47;
-    --backdrop-bg-rgb: 235, 235, 230;
+    --backdrop-bg-rgb: 232, 220, 184;
 }
 
 /* The translucent card/box tint reads too faint against the light background —
@@ -81,10 +81,11 @@ body::before {
     mix-blend-mode: overlay;
 }
 
-/* Grain + vignette make sense on the rich dark-green paper look, but just
-   read as dirty gray smudging on a clean white background — drop both */
+/* Overlay blend barely darkens a light backdrop — multiply reads the same
+   noise as visible aged-paper grain against the parchment tone instead */
 :root[data-theme="light"] body::before {
-    display: none;
+    opacity: 0.07;
+    mix-blend-mode: multiply;
 }
 
 /* Soft paper vignette */
@@ -98,7 +99,7 @@ body::after {
 }
 
 :root[data-theme="light"] body::after {
-    display: none;
+    background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(90, 70, 30, 0.14) 100%);
 }
 
 #root {
@@ -221,11 +222,13 @@ body.modal-open .signature {
 }
 
 .profile-picture-wrapper {
-    width: clamp(140px, 22vh, 220px);
-    height: clamp(140px, 22vh, 220px);
+    width: clamp(148px, 22vh, 228px);
+    height: clamp(148px, 22vh, 228px);
+    padding: 6px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: var(--bg);
+    background-color: rgba(var(--card-rgb), 0.07);
+    box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.12);
 }
 
 .profile-picture {
@@ -236,6 +239,7 @@ body.modal-open .signature {
     transform: scale(1.5);
     transform-origin: 50% 70%;
     display: block;
+    border-radius: 6px;
 }
 
 .text-section {
@@ -938,7 +942,8 @@ a:hover {
 }
 
 :root[data-theme="light"] .lightbox-backdrop::before {
-    display: none;
+    opacity: 0.07;
+    mix-blend-mode: multiply;
 }
 
 .lightbox-img {
