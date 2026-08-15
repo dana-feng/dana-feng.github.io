@@ -249,10 +249,7 @@ function ResearchInterests() {
           <InfoModal onClose={() => setOpen(false)}>
             <p className="publication-award" style={{ textAlign: 'center', marginBottom: 14 }}>research interests</p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
-              i am particularly interested in building and evaluating new and existing technological systems, practices, and interfaces within knowledge work contexts.
-            </p>
-            <p className="publication-abstract" style={{ marginBottom: 10 }}>
-              i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency, increased reliance or cognitive offloading, or the amplification and mitigation of challenges like imposter syndrome.
+              i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency or increased reliance / cognitive offloading.
             </p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.

@@ -45,7 +45,8 @@
    than the same opacity of a light border on the dark theme's background —
    bump it so the frame feels the same visual weight in both themes */
 :root[data-theme="light"] .profile-picture-wrapper {
-    box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.35);
+    background-color: rgba(var(--card-rgb), 0.14);
+    box-shadow: 0 0 0 1.5px rgba(var(--card-rgb), 0.5);
 }
 
 :root[data-theme="light"] .publication-item:hover,
