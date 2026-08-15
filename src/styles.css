@@ -108,10 +108,14 @@ body::after {
 
 
 /* Navigation */
+body.modal-open .top-nav {
+    display: none;
+}
+
 .top-nav {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: max(20px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -523,8 +527,8 @@ body::after {
 /* Signature */
 .signature {
     position: fixed;
-    left: 20px;
-    bottom: 10px;
+    left: max(20px, env(safe-area-inset-left));
+    bottom: max(10px, env(safe-area-inset-bottom));
     z-index: 900;
     font-size: 28px;
     line-height: 1.1;
@@ -581,6 +585,19 @@ body::after {
     .publication-item {
         aspect-ratio: unset;
         min-height: 0;
+    }
+}
+
+@media (max-width: 520px) {
+    /* two tight columns crush publication text into a ~150px-wide box —
+       give each item the full width to breathe */
+    .publications-list {
+        grid-template-columns: 1fr;
+    }
+
+    .social-link {
+        padding: 7px 9px;
+        font-size: 16px;
     }
 }
 
@@ -893,25 +910,27 @@ a:hover {
     }
 }
 
-/* Art lightbox */
+/* Popup — full screen, same background/texture as the rest of the site so it
+   reads as another page rather than a floating card (and is mobile-friendly) */
 .lightbox-backdrop {
     position: fixed;
     inset: 0;
-    background-color: rgba(var(--backdrop-bg-rgb), 0.92);
     z-index: 2000;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 24px;
+    overflow-y: auto;
+    padding: clamp(60px, 9vh, 90px) 20px clamp(48px, 8vh, 80px);
+    background-color: var(--bg);
 }
 
 .lightbox-backdrop::before {
     content: '';
-    position: absolute;
-    z-index: -1;
+    position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: 0.45;
+    z-index: -1;
+    opacity: 0.52;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.1 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 220px 220px;
@@ -930,63 +949,34 @@ a:hover {
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
 }
 
-
-/* Publication / research interests popup — square, roughly the footprint of the grid it replaces */
 .info-modal {
     position: relative;
     z-index: 0;
-    background: rgba(var(--modal-bg-rgb), 0.98);
-    border: 1px solid rgba(var(--modal-border-rgb), 0.15);
-    border-radius: 10px;
-    padding: 28px 22px 22px;
-    width: min(65vw, 65vh, 480px);
-    height: min(65vw, 65vh, 480px);
-    flex-shrink: 0;
-    max-width: 92vw;
-    max-height: 85vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-}
-
-.info-modal::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.3;
-    border-radius: 10px;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.1 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 220px 220px;
-    mix-blend-mode: overlay;
-}
-
-:root[data-theme="light"] .info-modal::before {
-    display: none;
-}
-
-.info-modal.art-modal {
-    width: min(70vw, 500px);
-    height: auto;
-    max-height: 85vh;
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
 }
 
 .info-modal-close {
-    position: absolute;
-    top: 6px;
-    right: 8px;
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
     background: none;
     border: none;
-    color: rgba(var(--text-rgb), 0.6);
-    font-size: 26px;
+    color: var(--accent);
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 34px;
     line-height: 1;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 6px 12px;
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index: 1;
 }
 
 .info-modal-close:hover {
-    color: rgb(var(--text-rgb));
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 /* Publication abstract text */

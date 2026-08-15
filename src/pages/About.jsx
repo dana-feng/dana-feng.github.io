@@ -97,7 +97,11 @@ function InfoModal({ onClose, children, className = '' }) {
   useEffect(() => {
     const close = (e) => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
+    document.body.classList.add('modal-open')
+    return () => {
+      window.removeEventListener('keydown', close)
+      document.body.classList.remove('modal-open')
+    }
   }, [onClose])
 
   return (
