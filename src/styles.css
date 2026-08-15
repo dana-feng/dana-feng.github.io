@@ -109,7 +109,8 @@ body::after {
 
 
 /* Navigation */
-body.modal-open .top-nav {
+body.modal-open .top-nav,
+body.modal-open .signature {
     display: none;
 }
 
@@ -224,12 +225,16 @@ body.modal-open .top-nav {
     height: clamp(140px, 22vh, 220px);
     border-radius: 10px;
     overflow: hidden;
+    background-color: var(--bg);
 }
 
 .profile-picture {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 50% 70%;
+    transform: scale(1.5);
+    transform-origin: 50% 70%;
     display: block;
 }
 
@@ -585,7 +590,8 @@ body.modal-open .top-nav {
 @media (max-width: 520px) {
     /* two tight columns crush publication text into a ~150px-wide box —
        give each item the full width to breathe */
-    .publications-list {
+    .publications-list,
+    .art-cards-grid {
         grid-template-columns: 1fr;
     }
 

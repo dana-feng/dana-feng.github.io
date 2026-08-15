@@ -149,14 +149,21 @@ function DrawingCanvas() {
     function onTouchMove(e) { const t = e.touches[0]; if (t) move(t.clientX, t.clientY) }
     function onTouchEnd() { end() }
 
+    // Touch-drag is also how you scroll, so on touch devices a single-finger
+    // drag can't tell "scroll" and "draw" apart — only draw on devices with a
+    // real pointer (mouse/trackpad), same gate the custom cursor already uses.
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches
+
     window.addEventListener('resize', resize)
     window.addEventListener('mousedown', onMouseDown)
     window.addEventListener('mousemove', onMouseMove)
     window.addEventListener('mouseup', onMouseUp)
     window.addEventListener('mouseleave', onMouseUp)
-    window.addEventListener('touchstart', onTouchStart, { passive: true })
-    window.addEventListener('touchmove', onTouchMove, { passive: true })
-    window.addEventListener('touchend', onTouchEnd)
+    if (hasFinePointer) {
+      window.addEventListener('touchstart', onTouchStart, { passive: true })
+      window.addEventListener('touchmove', onTouchMove, { passive: true })
+      window.addEventListener('touchend', onTouchEnd)
+    }
 
     resize()
     rafId = requestAnimationFrame(render)
@@ -168,9 +175,11 @@ function DrawingCanvas() {
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('mouseup', onMouseUp)
       window.removeEventListener('mouseleave', onMouseUp)
-      window.removeEventListener('touchstart', onTouchStart)
-      window.removeEventListener('touchmove', onTouchMove)
-      window.removeEventListener('touchend', onTouchEnd)
+      if (hasFinePointer) {
+        window.removeEventListener('touchstart', onTouchStart)
+        window.removeEventListener('touchmove', onTouchMove)
+        window.removeEventListener('touchend', onTouchEnd)
+      }
     }
   }, [])
 

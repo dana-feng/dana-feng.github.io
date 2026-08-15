@@ -6,7 +6,7 @@ import { FaLinkedin } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../ThemeContext'
 
-const profileImage = 'https://i.imgur.com/Z15TEsP.jpeg'
+const profileImage = 'https://i.imgur.com/tqcQtJg.jpeg'
 
 const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz'
 
