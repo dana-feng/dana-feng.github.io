@@ -179,6 +179,47 @@ body.modal-open .signature {
     transform: scale(1.1);
 }
 
+.theme-toggle-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+@keyframes hint-fade {
+    0% { opacity: 0; }
+    12% { opacity: 1; }
+    88% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.hint-bubble {
+    pointer-events: none;
+    background-color: rgb(var(--text-rgb));
+    color: var(--bg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    white-space: nowrap;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    animation: hint-fade 6s ease forwards;
+    z-index: 950;
+}
+
+.hint-bubble-toggle {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 10px);
+}
+
+.hint-bubble-draw {
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
+    left: 50%;
+    transform: translateX(-50%);
+    animation-duration: 7s;
+}
+
 /* About Page — one full-page section shown at a time, no page scroll */
 .about-container {
     position: relative;
@@ -241,9 +282,9 @@ body.modal-open .signature {
 }
 
 .profile-picture-plain {
-    object-position: 50% 22%;
-    transform: scale(1.3);
-    transform-origin: 50% 22%;
+    object-position: 50% 8%;
+    transform: scale(1.15);
+    transform-origin: 50% 8%;
 }
 
 .text-section {

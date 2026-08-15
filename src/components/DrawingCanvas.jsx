@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const FADE_MS = 900
 const GOLD = '236, 185, 0'
@@ -6,6 +6,23 @@ const TAPER_POINTS = 5
 
 function DrawingCanvas() {
   const canvasRef = useRef(null)
+  const [showHint, setShowHint] = useState(false)
+
+  function dismissHint() {
+    setShowHint(false)
+    localStorage.setItem('drawHintSeen', '1')
+  }
+
+  useEffect(() => {
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches
+    if (!hasFinePointer || localStorage.getItem('drawHintSeen')) return
+    const showTimer = setTimeout(() => setShowHint(true), 1400)
+    const hideTimer = setTimeout(() => dismissHint(), 7000)
+    return () => {
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -113,6 +130,7 @@ function DrawingCanvas() {
     }
 
     function start(clientX, clientY) {
+      dismissHint()
       drawing = true
       currentStroke = {
         points: [toPoint(clientX, clientY)],
@@ -183,7 +201,12 @@ function DrawingCanvas() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="drawing-canvas" />
+  return (
+    <>
+      <canvas ref={canvasRef} className="drawing-canvas" />
+      {showHint && <div className="hint-bubble hint-bubble-draw">click &amp; drag anywhere to draw</div>}
+    </>
+  )
 }
 
 export default DrawingCanvas
