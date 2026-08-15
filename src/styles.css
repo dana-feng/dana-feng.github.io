@@ -57,9 +57,7 @@ h6 {
 }
 
 html, body {
-    height: 100%;
     overflow-x: hidden;
-    overflow-y: auto;
 }
 
 body {
@@ -83,11 +81,10 @@ body::before {
     mix-blend-mode: overlay;
 }
 
-/* Overlay blend barely darkens a light backdrop — multiply reads the same
-   noise as visible texture against the blue tone instead */
+/* The noise-filter grain renders inconsistently across browsers/devices
+   (looked grey on mobile) — keep blue mode clean instead */
 :root[data-theme="light"] body::before {
-    opacity: 0.07;
-    mix-blend-mode: multiply;
+    display: none;
 }
 
 /* Soft paper vignette */
@@ -107,7 +104,6 @@ body::after {
 #root {
     position: relative;
     z-index: 1;
-    height: 100%;
 }
 
 
@@ -245,8 +241,9 @@ body.modal-open .signature {
 }
 
 .profile-picture-plain {
-    object-position: center;
-    transform: none;
+    object-position: 50% 22%;
+    transform: scale(1.3);
+    transform-origin: 50% 22%;
 }
 
 .text-section {
@@ -601,8 +598,7 @@ body.modal-open .signature {
 @media (max-width: 520px) {
     /* two tight columns crush publication text into a ~150px-wide box —
        give each item the full width to breathe */
-    .publications-list,
-    .art-cards-grid {
+    .publications-list {
         grid-template-columns: 1fr;
     }
 
@@ -650,6 +646,12 @@ body.modal-open .signature {
     grid-template-columns: repeat(2, 1fr);
     gap: clamp(14px, 2.5vh, 24px);
     width: 100%;
+}
+
+@media (max-width: 520px) {
+    .art-cards-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .art-card {
@@ -949,8 +951,7 @@ a:hover {
 }
 
 :root[data-theme="light"] .lightbox-backdrop::before {
-    opacity: 0.07;
-    mix-blend-mode: multiply;
+    display: none;
 }
 
 .lightbox-img {
