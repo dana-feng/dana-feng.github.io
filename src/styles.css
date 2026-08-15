@@ -41,6 +41,13 @@
     box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.12);
 }
 
+/* a dark border at low opacity on a light background reads much fainter
+   than the same opacity of a light border on the dark theme's background —
+   bump it so the frame feels the same visual weight in both themes */
+:root[data-theme="light"] .profile-picture-wrapper {
+    box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.35);
+}
+
 :root[data-theme="light"] .publication-item:hover,
 :root[data-theme="light"] .art-card:hover {
     background-color: rgba(var(--card-rgb), 0.08);
@@ -749,7 +756,7 @@ body.modal-open .signature {
 
     .art-card-image-wrap {
         flex: none;
-        height: 220px;
+        height: 150px;
     }
 }
 
