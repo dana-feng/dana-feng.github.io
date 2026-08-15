@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../ThemeContext'
 
 const profileImage = 'https://i.imgur.com/tqcQtJg.jpeg'
+const profileImageChild = 'https://i.imgur.com/y2MiCmt.jpeg'
 
 const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -41,7 +42,7 @@ function useScramble(target, duration = 1400, trigger = 0) {
 
 function FlowerAccent({ className }) {
   const { theme } = useTheme()
-  return <span className={className}>{theme === 'dark' ? '🌿' : '🍁'}</span>
+  return <span className={className}>{theme === 'dark' ? '🌿' : '🪷'}</span>
 }
 
 function FadeIn({ children, delay = 0 }) {
@@ -269,9 +270,16 @@ function ResearchInterests() {
 }
 
 function ProfilePicture() {
+  const { theme } = useTheme()
+  const isChild = theme === 'light'
+  const src = isChild ? profileImageChild : profileImage
   return (
     <div className="profile-picture-wrapper">
-      <img src={profileImage} alt="dana feng" className="profile-picture" />
+      <img
+        src={src}
+        alt="dana feng"
+        className={`profile-picture${isChild ? ' profile-picture-plain' : ''}`}
+      />
     </div>
   )
 }

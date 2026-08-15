@@ -16,7 +16,7 @@ function Signature() {
           onClick={toggleTheme}
           aria-label={theme === 'dark' ? 'switch to light mode' : 'switch to dark mode'}
         >
-          {theme === 'dark' ? '🌙' : '☀️'}
+          {theme === 'dark' ? '🌙' : '🌑'}
         </button>
         <p className="publication-award">last updated august 2026</p>
       </footer>
