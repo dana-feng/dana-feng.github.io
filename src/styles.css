@@ -492,7 +492,7 @@ body.modal-open .signature {
     flex-direction: column;
     justify-content: center;
     gap: clamp(14px, 2.5vh, 28px);
-    align-items: center;
+    align-items: stretch;
     width: 100%;
     flex: 1;
     min-height: 0;
@@ -693,17 +693,6 @@ body.modal-open .signature {
     .art-cards-grid {
         grid-template-columns: 1fr;
     }
-
-    /* a 1:1 card at near-full screen width eats more than half the
-       viewport — cap the image height so more than one card fits */
-    .art-card {
-        aspect-ratio: unset;
-    }
-
-    .art-card-image-wrap {
-        flex: none;
-        height: 220px;
-    }
 }
 
 .art-card {
@@ -752,6 +741,19 @@ body.modal-open .signature {
     height: 100%;
     object-fit: cover;
     display: block;
+}
+
+@media (max-width: 520px) {
+    /* a 1:1 card at near-full screen width eats more than half the
+       viewport — cap the image height so more than one card fits */
+    .art-card {
+        aspect-ratio: unset;
+    }
+
+    .art-card-image-wrap {
+        flex: none;
+        height: 220px;
+    }
 }
 
 .art-modal-img {
