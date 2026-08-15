@@ -3,6 +3,18 @@
 
 <head>
     <script>
+        // Undo the 404.html redirect trick: restore the real path (e.g. /art)
+        // from the query string before React Router reads the URL.
+        (function (l) {
+            if (l.search[1] === '/') {
+                var decoded = l.search.slice(1).split('&').map(function (s) {
+                    return s.replace(/~and~/g, '&')
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location));
         (function () {
             try {
                 var stored = localStorage.getItem('theme');
