@@ -44,11 +44,6 @@
 /* a dark border at low opacity on a light background reads much fainter
    than the same opacity of a light border on the dark theme's background —
    bump it so the frame feels the same visual weight in both themes */
-:root[data-theme="light"] .profile-picture-wrapper {
-    background-color: rgba(var(--card-rgb), 0.14);
-    box-shadow: 0 0 0 1.5px rgba(var(--card-rgb), 0.5);
-}
-
 :root[data-theme="light"] .publication-item:hover,
 :root[data-theme="light"] .art-card:hover {
     background-color: rgba(var(--card-rgb), 0.08);
@@ -1065,4 +1060,10 @@ a:hover {
     line-height: 1.55;
     color: rgb(var(--text-rgb));
     margin-top: 10px;
+}
+
+.handwritten-note {
+    font-family: 'Reenie Beanie', cursive;
+    color: var(--accent);
+    font-size: 19px;
 }

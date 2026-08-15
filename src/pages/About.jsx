@@ -249,13 +249,13 @@ function ResearchInterests() {
           <InfoModal onClose={() => setOpen(false)}>
             <p className="publication-award" style={{ textAlign: 'center', marginBottom: 14 }}>research interests</p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
-              i aim to understand not only how tools are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency or increased reliance / cognitive offloading.
+              i aim to understand not only how technological tools and systems are built, but also why they are built and how they, in turn, shape the people who use them. as someone who actively works with and is affected by rapidly evolving technologies (especially ai), i am attentive to the ways these tools influence how knowledge workers collaborate, learn, and develop expertise. this includes both their benefits and their unintended consequences, such as shifts in agency or increased reliance / cognitive offloading.
             </p>
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
             </p>
-            <p className="publication-abstract" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
-            <ul className="research-blurb-list publication-abstract">
+            <p className="publication-abstract handwritten-note" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
+            <ul className="research-blurb-list publication-abstract handwritten-note">
               <li>how can we increase feelings of accomplishment, agency, and meaningful contribution when using ai for coding?</li>
               <li>what kinds of systems can support the development of foundational skills, even when ai is capable of performing the underlying tasks?</li>
             </ul>
