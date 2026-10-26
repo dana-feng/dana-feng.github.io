@@ -1,34 +1,52 @@
-import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const sections = ['about', 'research', 'art']
 
-function sectionForPath(pathname) {
-  if (pathname === '/research') return 'research'
-  if (pathname === '/art') return 'art'
-  return 'about'
+function pathFor(id) {
+  return id === 'about' ? '/' : `/${id}`
 }
 
 function Navigation() {
   const navigate = useNavigate()
-  const location = useLocation()
-  const active = sectionForPath(location.pathname)
-  const currentIndex = sections.indexOf(active)
+  const [active, setActive] = useState('about')
 
-  function goTo(offset) {
-    const nextIndex = (currentIndex + offset + sections.length) % sections.length
-    const id = sections[nextIndex]
-    navigate(id === 'about' ? '/' : `/${id}`)
-  }
+  // Highlight whichever section fills the middle of the viewport, and keep the
+  // URL in sync so the address bar is shareable without adding history entries
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          const id = entry.target.id
+          setActive(id)
+          if (window.location.pathname !== pathFor(id)) {
+            window.history.replaceState(window.history.state, '', pathFor(id))
+          }
+        })
+      },
+      { rootMargin: '-45% 0px -45% 0px' }
+    )
+    sections.forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <nav className="top-nav">
-      <button type="button" className="nav-arrow" onClick={() => goTo(-1)} aria-label="previous section">
-        ^
-      </button>
-      <button type="button" className="nav-arrow nav-arrow-down" onClick={() => goTo(1)} aria-label="next section">
-        ^
-      </button>
+    <nav className="top-nav" aria-label="sections">
+      {sections.map((id) => (
+        <button
+          key={id}
+          type="button"
+          className={`nav-link${active === id ? ' nav-link-active' : ''}`}
+          onClick={() => navigate(pathFor(id))}
+          aria-current={active === id ? 'true' : undefined}
+        >
+          {id}
+        </button>
+      ))}
     </nav>
   )
 }

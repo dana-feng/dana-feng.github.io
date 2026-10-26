@@ -49,7 +49,8 @@ function FadeIn({ children, delay = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
     >
       {children}
@@ -289,79 +290,79 @@ function sectionForPath(pathname) {
 
 function About() {
   const location = useLocation()
-  const section = sectionForPath(location.pathname)
+
+  // Deep links (/research, /art) and in-app navigation scroll to that section
+  useEffect(() => {
+    const section = sectionForPath(location.pathname)
+    if (section === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [location.key])
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.main
-        key={section}
-        className="about-container"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-      >
+    <main className="about-container">
 
-        {section === 'about' && (
-          <div id="about" className="about-content about-content-full">
-            <h1 className="section-heading">
-              about <FlowerAccent className="heading-accent" />
-            </h1>
-            <FadeIn delay={0.1}>
-              <div className="profile-section">
-                <ProfilePicture />
-                <div className="social-links">
-                  <a href="mailto:danafeng308@gmail.com" className="social-link"><MdEmail /></a>
-                  <a href="https://scholar.google.com/citations?user=m4FSnfcAAAAJ&hl=en&authuser=1&oi=ao" target="_blank" rel="noopener noreferrer" className="social-link"><SiGooglescholar /></a>
-                  <a href="https://www.linkedin.com/in/dana-feng/" target="_blank" rel="noopener noreferrer" className="social-link"><FaLinkedin /></a>
-                </div>
+      <section id="about" className="page-section">
+        <div className="about-content about-content-full">
+          <h1 className="section-heading">
+            about <FlowerAccent className="heading-accent" />
+          </h1>
+          <FadeIn delay={0.1}>
+            <div className="profile-section">
+              <ProfilePicture />
+              <div className="social-links">
+                <a href="mailto:danafeng308@gmail.com" className="social-link"><MdEmail /></a>
+                <a href="https://scholar.google.com/citations?user=m4FSnfcAAAAJ&hl=en&authuser=1&oi=ao" target="_blank" rel="noopener noreferrer" className="social-link"><SiGooglescholar /></a>
+                <a href="https://www.linkedin.com/in/dana-feng/" target="_blank" rel="noopener noreferrer" className="social-link"><FaLinkedin /></a>
               </div>
-            </FadeIn>
-
-            <FadeIn delay={0.2}>
-              <div className="text-section">
-                <p className="about-text">
-                  hi! i'm dana :) i'm an independent human-computer interaction researcher interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm an artist / illustrator, and have created work for various nyc cafes and bakeries.
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        )}
-
-        {section === 'research' && (
-          <div id="research" className="publications-content">
-            <FadeIn>
-              <h2 className="section-heading">research <FlowerAccent className="heading-accent" /></h2>
-            </FadeIn>
-
-            <div className="publications-list">
-              {publications.map((pub, i) => (
-                <FadeIn key={i} delay={i * 0.08}>
-                  <PublicationItem pub={pub} />
-                </FadeIn>
-              ))}
-
-              <FadeIn delay={0.24}>
-                <ResearchInterests />
-              </FadeIn>
             </div>
-          </div>
-        )}
+          </FadeIn>
 
-        {section === 'art' && (
-          <div id="art" className="art-content">
-            <FadeIn>
-              <h2 className="section-heading">art <FlowerAccent className="heading-accent" /></h2>
+          <FadeIn delay={0.2}>
+            <div className="text-section">
+              <p className="about-text">
+                hi! i'm dana :) i'm an independent human-computer interaction researcher interested in <span className="highlight">interaction design</span>, <span className="highlight">information synthesis</span>, <span className="highlight">socio-technical systems</span>, and <span className="highlight">social computing</span>. i'm also a software engineer at <a href="https://www.twosigma.com/" target="_blank" rel="noopener noreferrer">two sigma</a>, on the security engineering team, doing software development and infrastructure reliability work. in my free time, i'm an artist / illustrator, and have created work for various nyc cafes and bakeries.
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <section id="research" className="page-section">
+        <div className="publications-content">
+          <FadeIn>
+            <h2 className="section-heading">research <FlowerAccent className="heading-accent" /></h2>
+          </FadeIn>
+
+          <div className="publications-list">
+            {publications.map((pub, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <PublicationItem pub={pub} />
+              </FadeIn>
+            ))}
+
+            <FadeIn delay={0.24}>
+              <ResearchInterests />
             </FadeIn>
-
-            <FadeIn delay={0.08}>
-              <ArtGrid />
-            </FadeIn>
           </div>
-        )}
+        </div>
+      </section>
 
-      </motion.main>
-    </AnimatePresence>
+      <section id="art" className="page-section">
+        <div className="art-content">
+          <FadeIn>
+            <h2 className="section-heading">art <FlowerAccent className="heading-accent" /></h2>
+          </FadeIn>
+
+          <FadeIn delay={0.08}>
+            <ArtGrid />
+          </FadeIn>
+        </div>
+      </section>
+
+    </main>
   )
 }
 
