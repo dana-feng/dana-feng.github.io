@@ -75,7 +75,7 @@ function DrawingCanvas() {
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
 
-      // draw in a few continuous chunks (not per-segment) so round line-caps
+      // Draw in a few continuous chunks (not per-segment) so round line-caps
       // don't stack into a beaded/circular texture along the stroke
       const chunkCount = Math.min(5, Math.max(1, Math.ceil((n - 1) / 4)))
       const chunkSize = Math.ceil((n - 1) / chunkCount)
