@@ -903,7 +903,8 @@ body.modal-open .signature {
 .art-box p a,
 .art-text a,
 .publication-hint a,
-.publication-venue a {
+.publication-venue a,
+.publication-authors a {
     color: var(--accent);
     text-decoration: underline;
     text-decoration-style: dotted;
@@ -914,7 +915,8 @@ body.modal-open .signature {
 .art-box p a:hover,
 .art-text a:hover,
 .publication-hint a:hover,
-.publication-venue a:hover {
+.publication-venue a:hover,
+.publication-authors a:hover {
     text-decoration-style: solid;
 }
 
