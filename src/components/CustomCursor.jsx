@@ -6,8 +6,8 @@ function CustomCursor() {
   const mouseY = useMotionValue(-100)
   const [visible, setVisible] = useState(false)
 
-  const cursorX = useTransform(mouseX, v => v - 8)
-  const cursorY = useTransform(mouseY, v => v - 10)
+  const cursorX = useTransform(mouseX, v => v - 2)
+  const cursorY = useTransform(mouseY, v => v - 2)
 
   useEffect(() => {
     const move = (e) => {
@@ -29,7 +29,11 @@ function CustomCursor() {
       className="custom-cursor"
       style={{ opacity: visible ? 1 : 0, x: cursorX, y: cursorY }}
     >
-      ^
+      {/* a leaf whose tip is the pointer */}
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2 2 C14 2 21 9 19 19 C9 21 2 14 2 2 Z" className="cursor-leaf" />
+        <path d="M2 2 L19 19 L23 23" className="cursor-vein" />
+      </svg>
     </motion.div>
   )
 }
