@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../ThemeContext'
 import VineFrame from '../components/VineFrame'
 
-const profileImageDark = 'https://i.imgur.com/mBJyrCw.jpeg'
+const profileImageDark = 'https://i.imgur.com/dFmMw5Wl.jpeg'
 const profileImageLight = 'https://i.imgur.com/SYlwzyM.jpeg'
 
 const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz'
