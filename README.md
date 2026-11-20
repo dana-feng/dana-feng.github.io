@@ -1,4 +1,4 @@
-# Personal Website - React App
+# Personal Website
 
 A personal website for dana feng built with React, Vite, and React Router.
 
