@@ -73,8 +73,11 @@ h6 {
     font-weight: inherit;
 }
 
+/* clip (not hidden) stops sideways overflow without turning the body into
+   its own scroll container, which made scrolling sticky on iOS Safari */
 html, body {
     overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -1230,42 +1233,6 @@ a:hover {
     stroke-width: 1.1;
 }
 
-/* Phones: the side menu and pinned signature covered the content, so the
-   menu becomes one solid row across the top and the signature scrolls with
-   the page as a footer */
-@media (max-width: 768px) {
-    .top-nav {
-        top: 0;
-        left: 0;
-        right: 0;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 18px;
-        padding: max(10px, env(safe-area-inset-top)) 16px 12px;
-        background-color: var(--bg);
-        box-shadow: 0 1px 0 rgba(var(--card-rgb), 0.1);
-    }
-
-    .nav-link {
-        font-size: 22px;
-        padding: 4px 2px;
-    }
-
-    .nav-link:hover {
-        transform: none;
-    }
-
-    .page-section {
-        padding-top: calc(70px + env(safe-area-inset-top));
-    }
-
-    .signature {
-        position: static;
-        padding: 8px 20px max(24px, env(safe-area-inset-bottom));
-    }
-}
-
 /* Phones: thicker stems so the card vines don't vanish at small sizes */
 @media (max-width: 768px) {
     .vine-frame-stem {
@@ -1274,5 +1241,45 @@ a:hover {
 
     .vine-tendril {
         stroke-width: 1.1;
+    }
+}
+
+/* Card vines stop swaying while their card is off screen (saves repainting
+   hundreds of leaves every frame, which made scrolling stutter) */
+.vine-frame-paused .vine-leaf-sway,
+.vine-frame-paused .vine-tendril-sway,
+.vine-frame-paused .vine-flower-sway {
+    animation-play-state: paused;
+}
+
+/* Phones: keep the corner menu and pinned signature, but give each a solid
+   rounded backing so cards scrolling underneath don't show through */
+@media (max-width: 768px) {
+    .top-nav {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
+        padding: 4px 10px 6px;
+        border-radius: 12px;
+        background-color: var(--bg);
+        box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.1), 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .nav-link {
+        font-size: 22px;
+        padding: 4px 2px;
+    }
+
+    .signature {
+        left: max(12px, env(safe-area-inset-left));
+        bottom: max(12px, env(safe-area-inset-bottom));
+        padding: 6px 12px 6px;
+        border-radius: 12px;
+        background-color: var(--bg);
+        box-shadow: 0 0 0 1px rgba(var(--card-rgb), 0.1), 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    /* leave room at the bottom so the last card can scroll clear of the signature */
+    .page-section:last-of-type {
+        padding-bottom: 130px;
     }
 }
