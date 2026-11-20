@@ -303,7 +303,7 @@ function ProjectItem({ project }) {
           <h3 className="art-card-title">
             <span className="highlight">{project.title}</span>
           </h3>
-          <p className="publication-hint" style={{ marginTop: 2 }}>{project.subtitle}</p>
+          <p className="publication-authors publication-authors-clamped" style={{ marginTop: 2, marginBottom: 0 }}>{project.subtitle}</p>
         </div>
       </div>
       </VineFrame>
