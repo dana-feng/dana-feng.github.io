@@ -68,7 +68,7 @@ function pickFlower(rand) {
   return {
     type: FLOWER_TYPES[Math.floor(rand() * FLOWER_TYPES.length)],
     color: 1 + Math.floor(rand() * 4),
-    scale: 0.8 + rand() * 0.5,
+    scale: 0.45 + rand() * 0.2,
     turn: rand() * 360,
   }
 }
@@ -154,11 +154,11 @@ function buildVine(w, h, r, from, length, rand, leafScale, bloomChance = 0) {
       const angle = (Math.atan2(dy, dx) * 180) / Math.PI
       if (rand() < bloomChance) {
         // a flower sitting just outside the border
-        blooms.push({ x: p.x + p.nx * 5, y: p.y + p.ny * 5, ...pickFlower(rand) })
+        blooms.push({ x: p.x + p.nx * 3, y: p.y + p.ny * 3, ...pickFlower(rand) })
       } else if (rand() < 0.14) {
-        tendrils.push({ x, y, angle, side, size: 8 * leafScale })
+        tendrils.push({ x, y, angle, side, size: 5 * leafScale })
       } else {
-        leaves.push({ x, y, angle, size: (outward ? 8 + rand() * 4 : 5 + rand() * 2) * leafScale })
+        leaves.push({ x, y, angle, size: (outward ? 6 + rand() * 2.5 : 4 + rand() * 1.5) * leafScale })
       }
       side = rand() < 0.75 ? 1 : -1 // mostly outward, sometimes tucked in
       nextLeaf = d + 10 + rand() * 10
