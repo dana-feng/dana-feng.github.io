@@ -161,7 +161,6 @@ function PublicationItem({ pub }) {
           <p className="publication-authors publication-authors-clamped">{highlightAuthor(pub.authors)}</p>
           <p className="publication-venue publication-venue-clamped">{pub.venue}</p>
           {pub.award && <p className="publication-award">{pub.award}</p>}
-          <p className="publication-hint">click to read</p>
         </div>
       </VineFrame>
       <AnimatePresence>
@@ -327,7 +326,6 @@ function ResearchInterests() {
       <VineFrame seed="research interests">
         <div className="publication-item" onClick={() => setOpen(true)}>
           <p className="publication-award" style={{ textAlign: 'center' }}>research interests</p>
-          <p className="publication-hint" style={{ textAlign: 'center' }}>click to read</p>
         </div>
       </VineFrame>
       <AnimatePresence>
@@ -340,11 +338,6 @@ function ResearchInterests() {
             <p className="publication-abstract" style={{ marginBottom: 10 }}>
               i work at the intersection of academia and industry, grounding research in the lived realities of knowledge workers while seeing how we can make improvements. my goal is to both study and build systems that meaningfully support human development, rather than simply optimizing for efficiency.
             </p>
-            <p className="publication-abstract" style={{ marginBottom: 8 }}>some questions i've been thinking about lately:</p>
-            <ul className="research-blurb-list publication-abstract">
-              <li>how can we increase feelings of accomplishment, agency, and meaningful contribution when using ai for coding?</li>
-              <li>what kinds of systems can support the development of foundational skills, even when ai is capable of performing the underlying tasks?</li>
-            </ul>
           </InfoModal>
         )}
       </AnimatePresence>

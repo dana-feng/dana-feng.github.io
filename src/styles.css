@@ -237,34 +237,6 @@ body.modal-open .signature {
     display: inline-block;
 }
 
-@keyframes hint-fade {
-    0% { opacity: 0; }
-    12% { opacity: 1; }
-    88% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-.hint-bubble {
-    pointer-events: none;
-    background: rgba(var(--modal-bg-rgb), 0.95);
-    border: 1px solid rgba(var(--modal-border-rgb), 0.15);
-    color: rgb(var(--text-rgb));
-    font-family: 'Reenie Beanie', cursive;
-    font-size: 18px;
-    white-space: nowrap;
-    padding: 5px 12px;
-    border-radius: 6px;
-    opacity: 0;
-    animation: hint-fade 6s ease forwards;
-    z-index: 950;
-}
-
-.hint-bubble-toggle {
-    position: absolute;
-    left: 0;
-    bottom: calc(100% + 10px);
-}
-
 /* About Page — all sections stacked, each at least a full screen tall */
 .about-container {
     position: relative;
@@ -1289,5 +1261,16 @@ a:hover {
     .signature {
         position: static;
         padding: 8px 20px max(24px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Phones: thicker stems so the card vines don't vanish at small sizes */
+@media (max-width: 768px) {
+    .vine-frame-stem {
+        stroke-width: 1.7;
+    }
+
+    .vine-tendril {
+        stroke-width: 1.1;
     }
 }

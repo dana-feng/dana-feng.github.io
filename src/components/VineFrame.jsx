@@ -174,6 +174,7 @@ function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms
   const [size, setSize] = useState(null)
   const reduceMotion = useReducedMotion()
   const animate = !reduceMotion
+  const phoneFlowers = window.matchMedia('(max-width: 768px)').matches
 
   useEffect(() => {
     const el = ref.current
@@ -197,7 +198,9 @@ function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms
     const corner = Math.floor(rand() * 4)
     const mainLen = perimeter * (0.26 + rand() * 0.1)
     const shortLen = perimeter * (0.1 + rand() * 0.06)
-    const scale = w < 220 ? 0.8 : 1
+    // leaves read much smaller on a phone, so grow them there
+    const phone = window.matchMedia('(max-width: 768px)').matches
+    const scale = phone ? 1.5 : w < 220 ? 0.8 : 1
     return [
       { ...buildVine(w, h, r, cornerDistance(w, h, r, corner) - mainLen / 2, mainLen, rand, scale, blooms), flower: true },
       { ...buildVine(w, h, r, cornerDistance(w, h, r, (corner + 2) % 4) - shortLen / 2, shortLen, rand, scale, blooms), flower: blooms > 0 },
@@ -241,7 +244,7 @@ function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms
               {[...v.blooms, ...(v.flower ? [v.end] : [])].map((b, i) => (
                 <motion.g key={`f${i}`} {...appear(animate, i + 5)}>
                   <g className="vine-flower-sway" style={sway(vi + i + 9)}>
-                    <Flower f={b} />
+                    <Flower f={phoneFlowers ? { ...b, scale: b.scale * 1.4 } : b} />
                   </g>
                 </motion.g>
               ))}
