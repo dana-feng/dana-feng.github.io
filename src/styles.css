@@ -7,6 +7,13 @@
 }
 
 :root {
+    --vine-stem: #8FA670;
+    --vine-leaf: #A9C08A;
+    --vine-flower-center: #7A5200;
+    --vine-petal: #F7E08A;
+    --vine-petal-2: #ECB900;
+    --vine-petal-3: #F5C94A;
+    --vine-petal-4: #D99A00;
     --bg: #35412F;
     --text-rgb: 255, 255, 255;
     --accent: #ECB900;
@@ -18,6 +25,13 @@
 }
 
 :root[data-theme="light"] {
+    --vine-stem: #5E8A5A;
+    --vine-leaf: #7FAE78;
+    --vine-flower-center: #F4F8FD;
+    --vine-petal: #1F3A68;
+    --vine-petal-2: #2E5C9A;
+    --vine-petal-3: #24497F;
+    --vine-petal-4: #3B6AA8;
     --bg: #E9F1FA;
     --text-rgb: 26, 41, 66;
     --accent: #2E5C9A;
@@ -68,26 +82,6 @@ body {
     background-color: var(--bg);
     color: rgb(var(--text-rgb));
     position: relative;
-}
-
-/* Paper grain */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.52;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.1 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 220px 220px;
-    mix-blend-mode: overlay;
-}
-
-/* The noise-filter grain renders inconsistently across browsers/devices
-   (looked grey on mobile) — keep blue mode clean instead */
-:root[data-theme="light"] body::before {
-    display: none;
 }
 
 /* Soft paper vignette */
@@ -146,9 +140,27 @@ body.modal-open .signature {
 
 .nav-link-active {
     color: var(--accent);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link-label {
+    display: inline-block;
+}
+
+/* active tab underline: a vine that grows in under the word */
+.nav-vine {
+    position: absolute;
+    left: 4px;
+    bottom: -6px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.nav-vine-stem {
+    stroke-width: 1.2;
 }
 
 .theme-toggle {
@@ -213,14 +225,6 @@ body.modal-open .signature {
     bottom: calc(100% + 10px);
 }
 
-.hint-bubble-draw {
-    position: fixed;
-    top: max(20px, env(safe-area-inset-top));
-    left: 50%;
-    transform: translateX(-50%);
-    animation-duration: 7s;
-}
-
 /* About Page — all sections stacked, each at least a full screen tall */
 .about-container {
     position: relative;
@@ -279,12 +283,6 @@ body.modal-open .signature {
     object-fit: cover;
     display: block;
     border-radius: 6px;
-}
-
-.profile-picture-plain {
-    object-position: 50% 22%;
-    transform: scale(1.3);
-    transform-origin: 50% 22%;
 }
 
 .text-section {
@@ -662,10 +660,15 @@ body.modal-open .signature {
 
 .heading-accent {
     display: inline-block;
-    font-size: 0.55em;
-    opacity: 0.7;
     vertical-align: middle;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+}
+
+.accent-sprig {
+    display: block;
+    width: 0.7em;
+    height: 0.82em;
+    overflow: visible;
 }
 
 .art-grid {
@@ -886,7 +889,9 @@ body.modal-open .signature {
 /* Global inline content links (about text, art boxes, etc.) */
 .about-text a,
 .art-box p a,
-.art-text a {
+.art-text a,
+.publication-hint a,
+.publication-venue a {
     color: var(--accent);
     text-decoration: underline;
     text-decoration-style: dotted;
@@ -895,7 +900,9 @@ body.modal-open .signature {
 
 .about-text a:hover,
 .art-box p a:hover,
-.art-text a:hover {
+.art-text a:hover,
+.publication-hint a:hover,
+.publication-venue a:hover {
     text-decoration-style: solid;
 }
 
@@ -947,14 +954,6 @@ a:hover {
     color: inherit;
 }
 
-/* Drawing canvas — click and drag to doodle on the paper */
-.drawing-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
 /* Easter egg */
 .easter-egg-flower {
     position: fixed;
@@ -964,7 +963,7 @@ a:hover {
     font-size: 28px;
 }
 
-/* Custom cursor — a thin, delicate hint that you can draw */
+/* Custom cursor — a small leaf, tip first */
 @media (pointer: fine) {
     body, a, button {
         cursor: none;
@@ -975,12 +974,20 @@ a:hover {
         top: 0;
         left: 0;
         display: flex;
-        color: var(--accent);
-        font-family: 'Reenie Beanie', cursive;
-        font-size: 26px;
-        line-height: 1;
         pointer-events: none;
         z-index: 9999;
+        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+    }
+
+    .cursor-leaf {
+        fill: var(--vine-leaf);
+    }
+
+    .cursor-vein {
+        fill: none;
+        stroke: var(--vine-stem);
+        stroke-width: 1.4;
+        stroke-linecap: round;
     }
 }
 
@@ -996,23 +1003,6 @@ a:hover {
     overflow-y: auto;
     padding: clamp(60px, 9vh, 90px) 20px clamp(48px, 8vh, 80px);
     background-color: var(--bg);
-}
-
-.lightbox-backdrop::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.52;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.1 -0.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 220px 220px;
-    mix-blend-mode: overlay;
-}
-
-:root[data-theme="light"] .lightbox-backdrop::before {
-    display: none;
 }
 
 .lightbox-img {
@@ -1065,4 +1055,163 @@ a:hover {
     font-family: 'Reenie Beanie', cursive;
     color: var(--accent);
     font-size: 19px;
+}
+/* "coming soon" placeholders: dashed outline, muted, not clickable */
+.publication-item.placeholder-card,
+.art-card.placeholder-card {
+    cursor: default;
+    border: 1px dashed rgba(var(--text-rgb), 0.25);
+    background-color: rgba(var(--card-rgb), 0.03);
+}
+
+.publication-item.placeholder-card:hover,
+.art-card.placeholder-card:hover {
+    background-color: rgba(var(--card-rgb), 0.03);
+    border-left-color: rgba(var(--text-rgb), 0.25);
+}
+
+.placeholder-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(13px, 1.8vh, 16px);
+    font-weight: 600;
+    font-family: 'Reenie Beanie', cursive;
+    color: var(--accent);
+}
+
+/* project logos: a small app-icon tile, not a full-bleed photo */
+.project-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.project-logo {
+    width: 38%;
+    max-width: 120px;
+    aspect-ratio: 1;
+    border-radius: 22%;
+    display: block;
+}
+
+
+/* a card left alone on the last row of a two-column grid sits in the middle
+   instead of hugging the left column (phones use one column, so skip there) */
+@media (min-width: 521px) {
+    .publications-list > :last-child:nth-child(odd),
+    .art-cards-grid > :last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc((100% - clamp(14px, 2.5vh, 24px)) / 2);
+    }
+}
+
+/* Vines: shared look for the little vines around the cards and photo */
+.vine-stem {
+    fill: none;
+    stroke: var(--vine-stem);
+    stroke-width: 1.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.vine-stem-1 {
+    stroke-width: 0.9;
+    opacity: 0.8;
+}
+
+.vine-tendril {
+    fill: none;
+    stroke: var(--vine-stem);
+    stroke-width: 0.8;
+    stroke-linecap: round;
+}
+
+.vine-leaf {
+    fill: var(--vine-leaf);
+}
+
+.vine-leaf-sway,
+.vine-tendril-sway {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: vine-leaf-sway 7s ease-in-out infinite alternate;
+}
+
+.vine-tendril-sway {
+    animation-name: vine-tendril-sway;
+}
+
+@keyframes vine-leaf-sway {
+    from { transform: rotate(-9deg) scale(0.9); }
+    to { transform: rotate(9deg) scale(1.06); }
+}
+
+@keyframes vine-tendril-sway {
+    from { transform: rotate(-7deg) scale(0.94); }
+    to { transform: rotate(7deg) scale(1.04); }
+}
+
+.vine-flower-sway {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: vine-flower-sway 8s ease-in-out infinite alternate;
+}
+
+@keyframes vine-flower-sway {
+    from { transform: rotate(-14deg) scale(0.88); }
+    to { transform: rotate(14deg) scale(1.08); }
+}
+
+.vine-petal,
+.vine-petal-1 {
+    fill: var(--vine-petal);
+}
+
+.vine-petal-2 {
+    fill: var(--vine-petal-2);
+}
+
+.vine-petal-3 {
+    fill: var(--vine-petal-3);
+}
+
+.vine-petal-4 {
+    fill: var(--vine-petal-4);
+}
+
+.vine-flower-center {
+    fill: var(--vine-flower-center);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vine-leaf-sway,
+    .vine-tendril-sway,
+    .vine-flower-sway {
+        animation: none;
+    }
+}
+
+/* Vines climbing around the rounded cards and the photo frame */
+.vine-frame {
+    position: relative;
+}
+
+.vine-frame-inline {
+    display: inline-block;
+}
+
+.vine-frame-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.vine-frame-stem {
+    stroke-width: 1.1;
 }

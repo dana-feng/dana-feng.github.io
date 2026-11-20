@@ -37,7 +37,7 @@ function Signature() {
           </button>
           {showHint && <span className="hint-bubble hint-bubble-toggle">tap to change theme</span>}
         </span>
-        <p className="publication-award">last updated august 2026</p>
+        <p className="publication-award">last updated november 2026</p>
       </footer>
     </div>
   )

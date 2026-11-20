@@ -5,9 +5,10 @@ import { SiGooglescholar } from 'react-icons/si'
 import { FaLinkedin } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../ThemeContext'
+import VineFrame from '../components/VineFrame'
 
-const profileImage = 'https://i.imgur.com/ebbQlWT.png'
-const profileImageChild = 'https://i.imgur.com/y2MiCmt.jpeg'
+const profileImageDark = 'https://i.imgur.com/mBJyrCw.jpeg'
+const profileImageLight = 'https://i.imgur.com/SYlwzyM.jpeg'
 
 const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -40,9 +41,26 @@ function useScramble(target, duration = 1400, trigger = 0) {
   return text
 }
 
+// a little sprig drawn like the vines in the margins
 function FlowerAccent({ className }) {
-  const { theme } = useTheme()
-  return <span className={className}>{theme === 'dark' ? '🌿' : '🪷'}</span>
+  const leaf = 'M0 0 C2.6 -3.2 6 -2.9 7.5 0 C6 2.9 2.6 3.2 0 0 Z'
+  const leaves = [
+    { x: 9.6, y: 21, r: -150 },
+    { x: 11.2, y: 16, r: -30 },
+    { x: 11.6, y: 11.4, r: -155 },
+    { x: 13.4, y: 7.2, r: -40 },
+  ]
+  return (
+    <span className={className} aria-hidden="true">
+      <svg viewBox="0 0 24 28" className="accent-sprig">
+        <path d="M8 27 C9 20 12.5 15 12 10 C11.8 7 13.5 4.5 15.5 3" className="vine-stem" />
+        {leaves.map((l, i) => (
+          <path key={i} d={leaf} transform={`translate(${l.x} ${l.y}) rotate(${l.r})`} className="vine-leaf" />
+        ))}
+        <circle cx="15.8" cy="2.8" r="1.6" className="vine-petal-2" />
+      </svg>
+    </span>
+  )
 }
 
 function FadeIn({ children, delay = 0 }) {
@@ -78,20 +96,20 @@ const publications = [
     abstract: 'Juniors enter as AI-natives, seniors adapted mid-career. AI is not just changing how engineers code-it is reshaping who holds agency across work and professional growth. We contribute junior-senior accounts on their usage of agentic AI through a three-phase mixed-methods study: ACTA combined with a Delphi process with 5 seniors, an AI-assisted debugging task with 10 juniors, and blind reviews of junior prompt histories by 5 more seniors. We found that agency in software engineering is primarily constrained by organizational policies rather than individual preferences, with experienced developers maintaining control through detailed delegation while novices struggle between over-reliance and cautious avoidance. Seniors leverage pre-AI foundational instincts to steer modern tools and possess valuable perspectives for mentoring juniors in their early AI-encouraged career development. From synthesis of results, we suggest three practices that focus on preserving agency in software engineering for coding, learning, and mentorship, especially as AI grows increasingly autonomous.'
   },
   {
-    title: 'generative ai in knowledge work: design implications for data navigation and decision-making',
-    url: 'https://programs.sigchi.org/chi/2025/program/content/188449',
-    authors: 'bhada yun*, dana feng*, ace chen, afshin nikzad, niloufar salehi',
-    venue: 'chi 2025',
-    award: '🏅 best paper honorable mention',
-    abstract: "Our study of 20 knowledge workers revealed a common challenge: the difficulty of synthesizing unstructured information scattered across multiple platforms to make informed decisions. Drawing on their vision of an ideal knowledge synthesis tool, we developed Yodeai, an AI-enabled system, to explore both the opportunities and limitations of AI in knowledge work. Through a user study with 16 product managers, we identified three key requirements for Generative AI in knowledge work: adaptable user control, transparent collaboration mechanisms, and the ability to integrate background knowledge with external information. However, we also found significant limitations, including overreliance on AI, user isolation, and contextual factors outside the AI's reach.As AI tools become increasingly prevalent in professional settings, we propose design principles that emphasize adaptability to diverse workflows, accountability in personal and collaborative contexts, and context- aware interoperability to guide the development of human - centered AI systems for product managers and knowledge workers."
-  },
-  {
     title: 'ai phenomenology for understanding human-ai experiences across eras',
     url: 'https://arxiv.org/pdf/2603.09020',
     authors: 'bhada yun, evgenia taranova, dana feng, renn su, april wang',
     venue: 'chi 2026 workshop on human-ai interaction alignment',
     award: null,
     abstract: `There is no 'ordinary' when it comes to AI. The human-AI experience is extraordinarily complex and specific to each person, yet dominant measures such as usability scales and engagement metrics flatten away nuance. We argue for AI phenomenology: a research stance that asks "How did it feel?" beyond the standard questions of "How well did it perform?" when interacting with AI systems. AI phenomenology acts as a paradigm for bidirectional human-AI alignment as it foregrounds users' first-person perceptions and interpretations of AI systems over time. We motivate AI phenomenology as a framework that captures how alignment is experienced, negotiated, and updated between users and AI systems. Tracing a lineage from Husserl through postphenomenology to Actor-Network Theory, and grounding our argument in three studies-two longitudinal studies with "Day", an AI companion, and a multi-method study of agentic AI in software engineering-we contribute a set of replicable methodological toolkits for conducting AI phenomenology research: instruments for capturing lived experience across personal and professional contexts, three design concepts (translucent design, agency-aware value alignment, temporal co-evolution tracking), and a concrete research agenda. We offer this toolkit not as a new paradigm but as a practical scaffold that researchers can adapt as AI systems-and the humans who live alongside them-continue to co-evolve.`
+  },
+  {
+    title: 'generative ai in knowledge work: design implications for data navigation and decision-making',
+    url: 'https://programs.sigchi.org/chi/2025/program/content/188449',
+    authors: 'bhada yun*, dana feng*, ace chen, afshin nikzad, niloufar salehi',
+    venue: 'chi 2025',
+    award: '🏅 best paper honorable mention',
+    abstract: "Our study of 20 knowledge workers revealed a common challenge: the difficulty of synthesizing unstructured information scattered across multiple platforms to make informed decisions. Drawing on their vision of an ideal knowledge synthesis tool, we developed Yodeai, an AI-enabled system, to explore both the opportunities and limitations of AI in knowledge work. Through a user study with 16 product managers, we identified three key requirements for Generative AI in knowledge work: adaptable user control, transparent collaboration mechanisms, and the ability to integrate background knowledge with external information. However, we also found significant limitations, including overreliance on AI, user isolation, and contextual factors outside the AI's reach.As AI tools become increasingly prevalent in professional settings, we propose design principles that emphasize adaptability to diverse workflows, accountability in personal and collaborative contexts, and context- aware interoperability to guide the development of human - centered AI systems for product managers and knowledge workers."
   }
 ]
 
@@ -135,15 +153,17 @@ function PublicationItem({ pub }) {
 
   return (
     <>
-      <div className="publication-item" onClick={() => setOpen(true)}>
-        <h3 className="publication-title publication-title-clamped publication-title-small">
-          {pub.title}
-        </h3>
-        <p className="publication-authors publication-authors-clamped">{highlightAuthor(pub.authors)}</p>
-        <p className="publication-venue publication-venue-clamped">{pub.venue}</p>
-        {pub.award && <p className="publication-award">{pub.award}</p>}
-        <p className="publication-hint">click to read</p>
-      </div>
+      <VineFrame seed={pub.title}>
+        <div className="publication-item" onClick={() => setOpen(true)}>
+          <h3 className="publication-title publication-title-clamped publication-title-small">
+            {pub.title}
+          </h3>
+          <p className="publication-authors publication-authors-clamped">{highlightAuthor(pub.authors)}</p>
+          <p className="publication-venue publication-venue-clamped">{pub.venue}</p>
+          {pub.award && <p className="publication-award">{pub.award}</p>}
+          <p className="publication-hint">click to read</p>
+        </div>
+      </VineFrame>
       <AnimatePresence>
         {open && (
           <InfoModal onClose={() => setOpen(false)}>
@@ -191,16 +211,18 @@ function ArtItem({ item }) {
 
   return (
     <>
-      <div className="art-card" onClick={() => setOpen(true)}>
-        <div className="art-card-image-wrap">
-          <img src={item.src} alt={item.alt} className="art-card-img" />
+      <VineFrame seed={item.label}>
+        <div className="art-card" onClick={() => setOpen(true)}>
+          <div className="art-card-image-wrap">
+            <img src={item.src} alt={item.alt} className="art-card-img" />
+          </div>
+          <div className="art-card-body">
+            <h3 className="art-card-title">
+              <span className="highlight">{item.label}</span>
+            </h3>
+          </div>
         </div>
-        <div className="art-card-body">
-          <h3 className="art-card-title">
-            <span className="highlight">{item.label}</span>
-          </h3>
-        </div>
-      </div>
+      </VineFrame>
       <AnimatePresence>
         {open && (
           <InfoModal onClose={() => setOpen(false)} className="art-modal">
@@ -226,6 +248,9 @@ function ArtItem({ item }) {
 function ArtGrid() {
   return (
     <div className="art-cards-grid">
+      <div className="art-card placeholder-card" aria-disabled="true">
+        <div className="art-card-image-wrap placeholder-image">oil painting coming soon</div>
+      </div>
       {artItems.map((item, i) => (
         <ArtItem key={i} item={item} />
       ))}
@@ -236,15 +261,75 @@ function ArtGrid() {
   )
 }
 
+function PlaceholderCard() {
+  return (
+    <div className="publication-item placeholder-card" aria-disabled="true">
+      <p className="publication-award" style={{ textAlign: 'center' }}>new paper coming soon</p>
+    </div>
+  )
+}
+
+const projects = [
+  {
+    title: 'list',
+    src: '/images/list-logo.png',
+    subtitle: (
+      <>
+        cofounded with{' '}
+        <a
+          href="https://www.linkedin.com/in/adannaabraham-igwe/"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          adanna
+        </a>
+      </>
+    ),
+    description: 'app coming soon (in beta testing right now!)',
+  },
+]
+
+function ProjectItem({ project }) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <>
+      <VineFrame seed={project.title}>
+      <div className="art-card" onClick={() => setOpen(true)}>
+        <div className="art-card-image-wrap project-logo-wrap">
+          <img src={project.src} alt={`${project.title} logo`} className="project-logo" />
+        </div>
+        <div className="art-card-body">
+          <h3 className="art-card-title">
+            <span className="highlight">{project.title}</span>
+          </h3>
+          <p className="publication-hint" style={{ marginTop: 2 }}>{project.subtitle}</p>
+        </div>
+      </div>
+      </VineFrame>
+      <AnimatePresence>
+        {open && (
+          <InfoModal onClose={() => setOpen(false)} className="art-modal">
+            <p className="publication-abstract" style={{ textAlign: 'center' }}>{project.description}</p>
+          </InfoModal>
+        )}
+      </AnimatePresence>
+    </>
+  )
+}
+
 function ResearchInterests() {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-      <div className="publication-item" onClick={() => setOpen(true)}>
-        <p className="publication-award" style={{ textAlign: 'center' }}>research interests</p>
-        <p className="publication-hint" style={{ textAlign: 'center' }}>click to read</p>
-      </div>
+      <VineFrame seed="research interests">
+        <div className="publication-item" onClick={() => setOpen(true)}>
+          <p className="publication-award" style={{ textAlign: 'center' }}>research interests</p>
+          <p className="publication-hint" style={{ textAlign: 'center' }}>click to read</p>
+        </div>
+      </VineFrame>
       <AnimatePresence>
         {open && (
           <InfoModal onClose={() => setOpen(false)}>
@@ -269,21 +354,23 @@ function ResearchInterests() {
 
 function ProfilePicture() {
   const { theme } = useTheme()
-  const isChild = theme === 'light'
-  const src = isChild ? profileImageChild : profileImage
+  const src = theme === 'light' ? profileImageLight : profileImageDark
   return (
+    <VineFrame seed="profile" radius={10} className="vine-frame-inline" blooms={0.1}>
     <div className="profile-picture-wrapper">
       <img
         src={src}
         alt="dana feng"
-        className={`profile-picture${isChild ? ' profile-picture-plain' : ''}`}
+        className="profile-picture"
       />
     </div>
+    </VineFrame>
   )
 }
 
 function sectionForPath(pathname) {
   if (pathname === '/research') return 'research'
+  if (pathname === '/projects') return 'projects'
   if (pathname === '/art') return 'art'
   return 'about'
 }
@@ -291,7 +378,7 @@ function sectionForPath(pathname) {
 function About() {
   const location = useLocation()
 
-  // Deep links (/research, /art) and in-app navigation scroll to that section
+  // Deep links (/research, /projects, /art) and in-app navigation scroll to that section
   useEffect(() => {
     const section = sectionForPath(location.pathname)
     if (section === 'about') {
@@ -337,13 +424,17 @@ function About() {
           </FadeIn>
 
           <div className="publications-list">
+            <FadeIn>
+              <PlaceholderCard />
+            </FadeIn>
+
             {publications.map((pub, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
+              <FadeIn key={i} delay={(i + 1) * 0.08}>
                 <PublicationItem pub={pub} />
               </FadeIn>
             ))}
 
-            <FadeIn delay={0.24}>
+            <FadeIn delay={0.32}>
               <ResearchInterests />
             </FadeIn>
           </div>
@@ -359,6 +450,22 @@ function About() {
           <FadeIn delay={0.08}>
             <ArtGrid />
           </FadeIn>
+        </div>
+      </section>
+
+      <section id="projects" className="page-section">
+        <div className="publications-content">
+          <FadeIn>
+            <h2 className="section-heading">projects <FlowerAccent className="heading-accent" /></h2>
+          </FadeIn>
+
+          <div className="art-cards-grid">
+            {projects.map((project, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <ProjectItem project={project} />
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
