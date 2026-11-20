@@ -172,6 +172,7 @@ function buildVine(w, h, r, from, length, rand, leafScale, bloomChance = 0) {
 function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms = 0.2 }) {
   const ref = useRef(null)
   const [size, setSize] = useState(null)
+  const [onScreen, setOnScreen] = useState(true)
   const reduceMotion = useReducedMotion()
   const animate = !reduceMotion
   const phoneFlowers = window.matchMedia('(max-width: 768px)').matches
@@ -186,7 +187,13 @@ function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms
     update()
     const ro = new ResizeObserver(update)
     ro.observe(el)
-    return () => ro.disconnect()
+    // pause the sway animations while the card is off screen
+    const io = new IntersectionObserver(([entry]) => setOnScreen(entry.isIntersecting), { rootMargin: '100px' })
+    io.observe(el)
+    return () => {
+      ro.disconnect()
+      io.disconnect()
+    }
   }, [])
 
   const vines = useMemo(() => {
@@ -208,7 +215,7 @@ function VineFrame({ children, seed = 'vine', radius = 8, className = '', blooms
   }, [size, radius, seed, blooms])
 
   return (
-    <div ref={ref} className={`vine-frame ${className}`.trim()}>
+    <div ref={ref} className={`vine-frame ${onScreen ? '' : 'vine-frame-paused'} ${className}`.replace(/\s+/g, ' ').trim()}>
       {children}
       {size && (
         <svg className="vine-frame-svg" width={size.w} height={size.h} aria-hidden="true">
