@@ -38,20 +38,20 @@ function VineUnderline({ width }) {
       />
       {leaves.map((l, i) => (
         <g key={i} transform={`translate(${l.x.toFixed(1)} ${yAt(l.x).toFixed(1)}) rotate(${l.angle})`}>
-          <motion.path d={leafPath(5)} className="vine-leaf" {...grow(0.25 + i * 0.25)} style={{ originX: 0, originY: 0.5 }} />
+          <motion.path d={leafPath(4.5)} className="vine-leaf" {...grow(0.25 + i * 0.25)} style={{ originX: 0, originY: 0.5 }} />
         </g>
       ))}
       <motion.g {...grow(0.85)} style={{ originX: 0.5, originY: 0.5 }}>
         {[0, 1, 2, 3, 4].map((p) => (
           <circle
             key={p}
-            cx={end + Math.cos((p / 5) * Math.PI * 2) * 2.4}
-            cy={yAt(end) + Math.sin((p / 5) * Math.PI * 2) * 2.4}
-            r="1.8"
+            cx={end + Math.cos((p / 5) * Math.PI * 2) * 1.7}
+            cy={yAt(end) + Math.sin((p / 5) * Math.PI * 2) * 1.7}
+            r="1.3"
             className="vine-petal-2"
           />
         ))}
-        <circle cx={end} cy={yAt(end)} r="1.3" className="vine-flower-center" />
+        <circle cx={end} cy={yAt(end)} r="0.9" className="vine-flower-center" />
       </motion.g>
     </svg>
   )

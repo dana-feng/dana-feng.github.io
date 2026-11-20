@@ -29,24 +29,13 @@ function Signature() {
         <span className="theme-toggle-wrap">
           <button
             type="button"
-            className="theme-toggle"
+            role="switch"
+            aria-checked={theme === 'dark'}
+            className={`theme-switch theme-switch-${theme}`}
             onClick={() => { toggleTheme(); dismissHint() }}
-            aria-label={theme === 'dark' ? 'switch to light mode' : 'switch to dark mode'}
+            aria-label="dark mode"
           >
-            {theme === 'dark' ? (
-              // a drawn crescent moon
-              <svg viewBox="0 0 20 20" className="theme-icon" aria-hidden="true">
-                <path d="M13.5 3.2 A7.2 7.2 0 1 0 16.8 14 A5.8 5.8 0 1 1 13.5 3.2 Z" />
-              </svg>
-            ) : (
-              // a drawn sun with short rays
-              <svg viewBox="0 0 20 20" className="theme-icon" aria-hidden="true">
-                <circle cx="10" cy="10" r="3.6" />
-                {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
-                  <line key={a} x1="10" y1="2.2" x2="10" y2="4.4" transform={`rotate(${a} 10 10)`} />
-                ))}
-              </svg>
-            )}
+            <span className="theme-switch-knob" aria-hidden="true" />
           </button>
           {showHint && <span className="hint-bubble hint-bubble-toggle">tap to change theme</span>}
         </span>
