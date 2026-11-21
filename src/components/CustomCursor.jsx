@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 
+const FINE_POINTER = '(pointer: fine)'
+
 function CustomCursor() {
+  // only replace the cursor when there's a real mouse; must match the
+  // @media (pointer: fine) rule that hides the system cursor
+  const [enabled, setEnabled] = useState(() => window.matchMedia(FINE_POINTER).matches)
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
   const [visible, setVisible] = useState(false)
@@ -10,6 +15,14 @@ function CustomCursor() {
   const cursorY = useTransform(mouseY, v => v - 2)
 
   useEffect(() => {
+    const mq = window.matchMedia(FINE_POINTER)
+    const change = () => setEnabled(mq.matches)
+    mq.addEventListener('change', change)
+    return () => mq.removeEventListener('change', change)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
     const move = (e) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
@@ -17,12 +30,14 @@ function CustomCursor() {
     }
     const hide = () => setVisible(false)
     window.addEventListener('mousemove', move)
-    window.addEventListener('mouseleave', hide)
+    document.documentElement.addEventListener('mouseleave', hide)
     return () => {
       window.removeEventListener('mousemove', move)
-      window.removeEventListener('mouseleave', hide)
+      document.documentElement.removeEventListener('mouseleave', hide)
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <motion.div

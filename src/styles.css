@@ -980,32 +980,34 @@ a:hover {
     font-size: 28px;
 }
 
-/* Custom cursor — a small leaf, tip first */
+/* Custom cursor — a small leaf, tip first. Only shown (and the system
+   cursor only hidden) with a precise mouse; the component doesn't render
+   otherwise */
 @media (pointer: fine) {
     body, a, button {
         cursor: none;
     }
+}
 
-    .custom-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
-        pointer-events: none;
-        z-index: 9999;
-        filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
-    }
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    pointer-events: none;
+    z-index: 9999;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+}
 
-    .cursor-leaf {
-        fill: var(--vine-leaf);
-    }
+.cursor-leaf {
+    fill: var(--vine-leaf);
+}
 
-    .cursor-vein {
-        fill: none;
-        stroke: var(--vine-stem);
-        stroke-width: 1.4;
-        stroke-linecap: round;
-    }
+.cursor-vein {
+    fill: none;
+    stroke: var(--vine-stem);
+    stroke-width: 1.4;
+    stroke-linecap: round;
 }
 
 /* Popup — full screen, same background/texture as the rest of the site so it
